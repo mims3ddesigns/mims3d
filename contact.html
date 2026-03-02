@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="description" content="Mims 3D Designs: Custom 3D printing, rapid prototyping, and design consulting in additive manufacturing. Based in Austin, TX – serving clients nationwide.">
+<meta name="keywords" content="3D printing Austin, additive manufacturing Texas, custom prototypes, rapid prototyping, DfAM consulting, 3D design services">
+<meta property="og:title" content="Mims 3D Designs | Precision Additive Manufacturing">
+<meta property="og:description" content="Turning ideas into reality with high-quality 3D printing and engineering expertise.">
+<meta property="og:image" content="https://mims3d.com/path-to-your-hero-image.jpg"> <!-- if you have one -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact • Mims 3D Designs</title>
@@ -216,21 +221,33 @@
     <p class="subtitle">Ready to bring your idea to life with precision 3D printing or additive manufacturing? Drop us a message for a free quote or consultation — we're excited to help!</p>
 
     <!-- Simple mailto form (opens email client) -->
-    <form action="mailto:mims.designs25@gmail.com" method="post" enctype="text/plain">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" name="name" required placeholder="Chance Mims">
+<form action="https://api.web3forms.com/submit" method="POST">
+  <!-- Hidden field: your access key from web3forms.com (get it free in 10 seconds) -->
+  <input type="hidden" name="access_key" value="ed5864e5-65fe-46bd-a4f8-f071088da27d">  <!-- ← Get this from https://web3forms.com -->
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required placeholder="your@email.com">
+  <!-- Optional: redirect after submit (to a thank-you page) -->
+  <input type="hidden" name="redirect" value="https://yourdomain.com/thanks.html">
 
-      <label for="phone">Phone (optional)</label>
-      <input type="tel" id="phone" name="phone" placeholder="(720) 468-1128">
+  <!-- Optional: subject line for your email -->
+  <input type="hidden" name="subject" value="New Quote Request from Mims 3D Designs Site">
 
-      <label for="message">Your Message / Project Details</label>
-      <textarea id="message" name="message" rows="6" required placeholder="Tell us about your project: prototype needs, materials, quantity, timeline, or any files/sketches..."></textarea>
+  <label for="name">Your Name</label>
+  <input type="text" id="name" name="name" required placeholder="Chance Mims">
 
-      <button type="submit">Send Message</button>
-    </form>
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="email" required placeholder="your@email.com">
+
+  <label for="phone">Phone (optional)</label>
+  <input type="tel" id="phone" name="phone" placeholder="(720) 468-1128">
+
+  <label for="message">Your Message / Project Details</label>
+  <textarea id="message" name="message" rows="6" required placeholder="Tell us about your project: prototype needs, materials, quantity, timeline, or any files/sketches..."></textarea>
+
+  <!-- Honeypot for spam (leave empty) -->
+  <input type="checkbox" name="botcheck" id="botcheck" style="display:none;" />
+
+  <button type="submit">Send Message</button>
+</form>
 
     <div class="direct-info">
       <p>Or reach us directly:</p>
@@ -258,5 +275,11 @@
       });
     });
   </script>
+<footer style="background: var(--bg-darker); padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: var(--text-light); border-top: 1px solid rgba(94,234,212,0.1);">
+  <p>&copy; 2026 Mims 3D Designs. All rights reserved.</p>
+  <p><a href="tel:+17204681128" style="color: var(--accent);"> (720) 468-1128 </a> | <a href="mailto:mims.designs25@gmail.com" style="color: var(--accent);">mims.designs25@gmail.com</a></p>
+  <p>Now proudly based in Austin, Texas – Worldwide shipping & virtual consultations.</p>
+  <p><a href="https://www.etsy.com/shop/Mims3Ddesigns" target="_blank" style="color: var(--accent);">Shop on Etsy</a> | <a href="https://instagram.com/mims3ddesigns" target="_blank" style="color: var(--accent);">Instagram</a></p>
+</footer>
 </body>
 </html>
