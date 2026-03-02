@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services • Mims 3D Designs</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0f241a;         /* deep forest green */
+      --bg-darker: #0a1a12;
+      --accent: #5eead4;          /* bright teal-green / lime accent */
+      --accent-dark: #34d399;
+      --text: #e2e8f0;
+      --text-light: #94a3b8;
+      --card-bg: rgba(30, 58, 48, 0.7);
+      --radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg-dark);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Header (same as index) */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--accent);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #000;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.25s;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+    }
+
+    /* Main content */
+    main {
+      padding-top: 140px; /* space for fixed header */
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-bottom: 6rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--text-light);
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(94,234,212,0.2);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .service-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .card-content {
+      padding: 2rem;
+    }
+
+    .card-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .card-content p {
+      color: var(--text-light);
+      margin-bottom: 1.8rem;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.95rem;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: 70%;
+        background: var(--bg-dark);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+      }
+
+      .nav-links.show {
+        transform: translateX(0);
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      main {
+        padding-top: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">MIMS 3D DESIGNS</div>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">HOME</a>
+        <a href="services.html" class="active">SERVICES</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+      </div>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Our Services</h1>
+    <p class="subtitle">Precision additive manufacturing solutions tailored for innovation, speed, and performance — right here in Savannah, Georgia.</p>
+
+    <div class="services-grid">
+
+      <!-- Service 1: 3D Printing -->
+      <div class="service-card">
+        <img src="https://cdn.thefabricator.com/a/metal-3d-printer-eliminates-the-debinding-process-1594824704.jpg" alt="Advanced 3D printing in action" class="service-img">
+        <div class="card-content">
+          <h2>3D Printing</h2>
+          <p>State-of-the-art 3D printing services using FDM, SLA, SLS, and metal technologies. From functional prototypes to end-use production parts, we deliver high-resolution, durable components with tight tolerances and a wide range of materials including PLA, ABS, nylon, resins, and metals.</p>
+          <a href="contact.html" class="btn">Request Service</a>
+        </div>
+      </div>
+
+      <!-- Service 2: Rapid Prototyping -->
+      <div class="service-card">
+        <img src="https://lodestar3d.com/wp-content/uploads/2024/01/DALL%C2%B7E-2024-05-27-19.39.21-A-high-resolution-image-of-a-3D-printer-in-action-with-the-print-head-visible-as-it-layers-a-detailed-prototype.-The-background-displays-various-comp-1024x646.webp" alt="Rapid prototyping with 3D printer" class="service-img">
+        <div class="card-content">
+          <h2>Rapid Prototyping (Additive Manufacturing)</h2>
+          <p>Accelerate your product development cycle with fast-turnaround prototypes. Iterate designs quickly, test form/fit/function, and validate concepts before committing to traditional tooling. Ideal for startups, engineers, and manufacturers needing speed without sacrificing quality.</p>
+          <a href="contact.html" class="btn">Get a Prototype Quote</a>
+        </div>
+      </div>
+
+      <!-- Service 3: Design Consulting -->
+      <div class="service-card">
+        <img src="https://i.all3dp.com/workers/images/fit=scale-down,w=1200,h=671,quality=79,gravity=0.5x0.5,format=auto/wp-content/uploads/2020/12/02161635/AdobeStock_292340919-plus-Fusion-360-DfAM-hero_-1-scaled.jpg" alt="DfAM design consulting on CAD software" class="service-img">
+        <div class="card-content">
+          <h2>Design Consulting – DfM & DfAM</h2>
+          <p>Expert guidance in Design for Manufacturing (DfM) and Design for Additive Manufacturing (DfAM). Optimize your parts for printability, reduce material use, minimize supports, improve strength, and lower costs. We help transition traditional designs to leverage the full potential of additive technologies — including topology optimization, lattice structures, and conformal cooling.</p>
+          <a href="contact.html" class="btn">Schedule Consultation</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Mobile menu toggle (same as index.html)
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+        menuToggle.textContent = '☰';
+      });
+    });
+  </script>
+</body>
+</html>
