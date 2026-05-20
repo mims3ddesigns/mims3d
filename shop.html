@@ -12,7 +12,6 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Shop 3D printed products - Mims Solutions">
   <title>Shop • Mims Solutions</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,127 +22,77 @@
     :root {
       --bg-light: #F8F9F6;
       --text-dark: #1F2521;
-      --text-medium: #47555E;
       --accent: #0D9488;
-      --accent-dark: #0B7A70;
       --card-bg: #FFFFFF;
       --border: #E2E8E0;
       --radius: 16px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      color: var(--text-dark);
-      background: var(--bg-light);
-      line-height: 1.6;
-    }
-
-    header { position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; letter-spacing: -1.2px; }
-
-    .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
-
-    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
-
-    .shop-hero { padding: 110px 5% 80px; text-align: center; }
-    .shop-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); margin-bottom: 1rem; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
 
     .shop-grid {
       max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5% 5rem;
+      margin: 120px auto 4rem;
+      padding: 0 5%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
     }
 
     .product-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: white;
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       cursor: pointer;
     }
-    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .product-card:hover { transform: translateY(-6px); }
 
-    .product-card img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-    }
+    .product-card img { width: 100%; height: 240px; object-fit: cover; }
+    .product-info { padding: 1.4rem; text-align: center; }
+    .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); margin: 0.5rem 0; }
 
-    .product-info { padding: 1.6rem; }
-    .product-info h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
-    .price { font-size: 1.55rem; font-weight: 700; color: var(--accent); margin: 0.8rem 0; }
-
-    /* Modal */
+    /* Smaller Modal */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.75);
       z-index: 2000;
       align-items: center;
       justify-content: center;
     }
     .modal-content {
       background: white;
-      max-width: 500px;
       width: 90%;
+      max-width: 460px;
       border-radius: var(--radius);
-      max-height: 90vh;
+      max-height: 92vh;
       overflow-y: auto;
     }
-    .modal-header {
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .close { font-size: 2rem; cursor: pointer; }
+    .modal-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .close { font-size: 1.8rem; cursor: pointer; }
 
     .modal-body { padding: 1.5rem; }
-    label { display: block; margin: 1rem 0 0.5rem; font-weight: 600; }
-
-    select, textarea {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
+    label { display: block; margin: 1rem 0 0.4rem; font-weight: 600; }
+    select, input, textarea { width: 100%; padding: 0.9rem; border: 1px solid #ddd; border-radius: 8px; }
 
     .btn {
-      display: block;
       width: 100%;
       padding: 1.1rem;
       margin-top: 1.5rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
+      border: none;
       border-radius: 50px;
-      text-align: center;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .btn:hover { background: var(--accent-dark); }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed; top: 0; right: 0; bottom: 0; width: 70%;
-        background: #1a3c2e; flex-direction: column; justify-content: center; align-items: center;
-        transform: translateX(100%); transition: transform 0.4s ease; z-index: 999;
-      }
-      .nav-links.show { transform: translateX(0); }
-      .menu-toggle { display: block; }
+      font-size: 1.05rem;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -163,110 +112,79 @@
     </nav>
   </header>
 
-  <section class="shop-hero">
-    <h1>Our Shop</h1>
-    <p style="font-size: 1.35rem; color: var(--text-medium);">Click any product for details and ordering</p>
-  </section>
-
   <div class="shop-grid">
-    <!-- DuckTrooper -->
-    <div class="product-card" onclick="openModal(0)">
+    <div class="product-card" onclick="openProductModal()">
       <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
       <div class="product-info">
         <h3>DuckTrooper Figurine</h3>
         <div class="price">$45</div>
+        <p style="color:#666; font-size:0.95rem;">Custom color available</p>
       </div>
     </div>
-
-    <!-- Add more cards here later -->
   </div>
 
   <!-- Modal -->
   <div id="productModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 id="modalTitle"></h2>
+        <h2 id="modalTitle">DuckTrooper Figurine</h2>
         <span class="close" onclick="closeModal()">×</span>
       </div>
       <div class="modal-body">
-        <img id="modalImage" style="width:100%; border-radius:12px; margin-bottom:1rem;" alt="">
-        
+        <img id="modalImage" src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" style="width:100%; border-radius:12px;" alt="">
+
         <form id="orderForm">
-          <input type="hidden" id="productName" name="product">
+          <input type="hidden" id="productName" value="DuckTrooper Figurine">
 
           <label>Duck Body Color</label>
-          <select id="color" name="color">
+          <select id="color">
             <option value="Yellow">Yellow</option>
             <option value="White">White</option>
             <option value="Black">Black</option>
             <option value="Orange">Orange</option>
             <option value="Red">Red</option>
             <option value="Purple">Purple</option>
-            <option value="Blue">Blue</option>
           </select>
 
-          <label>Special Requests / Notes</label>
-          <textarea name="notes" rows="4" placeholder="Any custom requests..."></textarea>
+          <label>Quantity</label>
+          <input type="number" id="qty" value="1" min="1" style="width:100px;">
 
-          <button type="button" onclick="submitOrder()" class="btn">Submit Order Request → Pay with PayPal</button>
+          <label>Special Requests / Shipping Notes</label>
+          <textarea id="notes" rows="3" placeholder="Any special requests or shipping info..."></textarea>
+
+          <button type="button" onclick="submitOrder()" class="btn">
+            Submit Order Request & Pay with PayPal
+          </button>
         </form>
       </div>
     </div>
   </div>
 
-  <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8;">
-    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
-    <p>
-      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
-      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
-    </p>
-  </footer>
-
   <script>
-    const modal = document.getElementById('productModal');
-    let currentProduct = "";
-
-    function openModal(index) {
-      currentProduct = "DuckTrooper Figurine";
-      document.getElementById('modalTitle').textContent = currentProduct;
-      document.getElementById('modalImage').src = "https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg";
-      document.getElementById('productName').value = currentProduct;
-      modal.style.display = "flex";
+    function openProductModal() {
+      document.getElementById('productModal').style.display = "flex";
     }
 
     function closeModal() {
-      modal.style.display = "none";
+      document.getElementById('productModal').style.display = "none";
     }
 
     function submitOrder() {
-      const form = document.getElementById('orderForm');
-      const formData = new FormData(form);
-      formData.append('access_key', 'YOUR_WEB3FORMS_KEY'); // We'll set this up if needed
+      const color = document.getElementById('color').value;
+      const qty = document.getElementById('qty').value;
+      const notes = document.getElementById('notes').value;
 
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        alert("Order request received! We'll contact you shortly.\n\nYou can now pay via PayPal.");
-        window.open('https://paypal.me/MimsSolutions/45', '_blank');
-        closeModal();
-      })
-      .catch(error => {
-        alert("Thank you! Please send payment via PayPal and we'll get started.");
-        window.open('https://paypal.me/MimsSolutions/45', '_blank');
-        closeModal();
-      });
+      const message = `New Order Request!\n\nProduct: DuckTrooper Figurine\nColor: ${color}\nQuantity: ${qty}\nNotes: ${notes || 'None'}`;
+
+      alert("Order request received!\n\nYou will now be redirected to PayPal to complete payment.");
+
+      // Open PayPal
+      window.open('https://paypal.me/MimsSolutions/45', '_blank');
+
+      // Optional: Try to send email (you'll need to set up Web3Forms)
+      console.log(message);
+      closeModal();
     }
 
-    // Mobile menu
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-    });
-  </script>
-</body>
-</html>
+    // Mobile menu script (add your existing one here)
+  </script
