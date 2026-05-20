@@ -29,9 +29,17 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: var(--bg-light); 
+      color: var(--text-dark); 
+      line-height: 1.6;
+    }
 
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    header { 
+      position: fixed; top: 0; width: 100%; background: var(--accent); 
+      z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+    }
     nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
 
@@ -46,23 +54,25 @@
 
     .product-card {
       background: white;
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
       cursor: pointer;
+      transition: all 0.3s;
     }
-    .product-card:hover { transform: translateY(-6px); }
+    .product-card:hover { transform: translateY(-8px); }
 
-    .product-card img { width: 100%; height: 240px; object-fit: cover; }
-    .product-info { padding: 1.4rem; text-align: center; }
+    .product-card img { width: 100%; height: 250px; object-fit: cover; }
+    .product-info { padding: 1.5rem; text-align: center; }
     .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); margin: 0.5rem 0; }
 
-    /* Smaller Modal */
+    /* Simple Modal */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0,0,0,0.7);
       z-index: 2000;
       align-items: center;
       justify-content: center;
@@ -70,28 +80,24 @@
     .modal-content {
       background: white;
       width: 90%;
-      max-width: 460px;
+      max-width: 420px;
       border-radius: var(--radius);
-      max-height: 92vh;
-      overflow-y: auto;
+      padding: 1.5rem;
     }
-    .modal-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-    .close { font-size: 1.8rem; cursor: pointer; }
+    .close { float: right; font-size: 2rem; cursor: pointer; }
 
-    .modal-body { padding: 1.5rem; }
-    label { display: block; margin: 1rem 0 0.4rem; font-weight: 600; }
-    select, input, textarea { width: 100%; padding: 0.9rem; border: 1px solid #ddd; border-radius: 8px; }
+    label { display: block; margin: 1rem 0 0.5rem; font-weight: 600; }
+    select, input, textarea { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px; }
 
     .btn {
       width: 100%;
-      padding: 1.1rem;
+      padding: 1rem;
       margin-top: 1.5rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border: none;
       border-radius: 50px;
-      font-size: 1.05rem;
       cursor: pointer;
     }
   </style>
@@ -113,60 +119,50 @@
   </header>
 
   <div class="shop-grid">
-    <div class="product-card" onclick="openProductModal()">
+    <div class="product-card" onclick="openModal()">
       <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
       <div class="product-info">
         <h3>DuckTrooper Figurine</h3>
         <div class="price">$45</div>
-        <p style="color:#666; font-size:0.95rem;">Custom color available</p>
       </div>
     </div>
   </div>
 
   <!-- Modal -->
-  <div id="productModal" class="modal">
+  <div id="modal" class="modal">
     <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modalTitle">DuckTrooper Figurine</h2>
-        <span class="close" onclick="closeModal()">×</span>
-      </div>
-      <div class="modal-body">
-        <img id="modalImage" src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" style="width:100%; border-radius:12px;" alt="">
+      <span class="close" onclick="closeModal()">×</span>
+      <h2>DuckTrooper Figurine - $45</h2>
+      
+      <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" style="width:100%; border-radius:12px; margin:1rem 0;" alt="">
 
-        <form id="orderForm">
-          <input type="hidden" id="productName" value="DuckTrooper Figurine">
+      <label>Duck Body Color</label>
+      <select id="color">
+        <option>Yellow</option>
+        <option>White</option>
+        <option>Black</option>
+        <option>Orange</option>
+        <option>Red</option>
+        <option>Purple</option>
+      </select>
 
-          <label>Duck Body Color</label>
-          <select id="color">
-            <option value="Yellow">Yellow</option>
-            <option value="White">White</option>
-            <option value="Black">Black</option>
-            <option value="Orange">Orange</option>
-            <option value="Red">Red</option>
-            <option value="Purple">Purple</option>
-          </select>
+      <label>Quantity</label>
+      <input type="number" id="qty" value="1" min="1">
 
-          <label>Quantity</label>
-          <input type="number" id="qty" value="1" min="1" style="width:100px;">
+      <label>Notes / Shipping Info</label>
+      <textarea id="notes" rows="3" placeholder="Any special requests..."></textarea>
 
-          <label>Special Requests / Shipping Notes</label>
-          <textarea id="notes" rows="3" placeholder="Any special requests or shipping info..."></textarea>
-
-          <button type="button" onclick="submitOrder()" class="btn">
-            Submit Order Request & Pay with PayPal
-          </button>
-        </form>
-      </div>
+      <button onclick="submitOrder()" class="btn">Submit Request & Pay with PayPal</button>
     </div>
   </div>
 
   <script>
-    function openProductModal() {
-      document.getElementById('productModal').style.display = "flex";
+    function openModal() {
+      document.getElementById('modal').style.display = "flex";
     }
 
     function closeModal() {
-      document.getElementById('productModal').style.display = "none";
+      document.getElementById('modal').style.display = "none";
     }
 
     function submitOrder() {
@@ -174,17 +170,19 @@
       const qty = document.getElementById('qty').value;
       const notes = document.getElementById('notes').value;
 
-      const message = `New Order Request!\n\nProduct: DuckTrooper Figurine\nColor: ${color}\nQuantity: ${qty}\nNotes: ${notes || 'None'}`;
-
-      alert("Order request received!\n\nYou will now be redirected to PayPal to complete payment.");
-
-      // Open PayPal
+      alert(`Order Request Received!\n\nProduct: DuckTrooper Figurine\nColor: ${color}\nQuantity: ${qty}\n\nRedirecting to PayPal...`);
+      
       window.open('https://paypal.me/MimsSolutions/45', '_blank');
-
-      // Optional: Try to send email (you'll need to set up Web3Forms)
-      console.log(message);
       closeModal();
     }
 
-    // Mobile menu script (add your existing one here)
-  </script
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    });
+  </script>
+</body>
+</html>
