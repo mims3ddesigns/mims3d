@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,8 +12,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Shop high-quality 3D printed products - DuckTrooper, fishing organizers, NFC dog tags & more | Mims Solutions">
-  
+  <meta name="description" content="Shop 3D printed products - Mims Solutions">
   <title>Shop • Mims Solutions</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,72 +40,19 @@
       line-height: 1.6;
     }
 
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: var(--accent);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
+    header { position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; letter-spacing: -1.2px; }
 
-    nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #000;
-      letter-spacing: -1.2px;
-    }
+    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
+    .shop-hero { padding: 110px 5% 80px; text-align: center; }
+    .shop-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); margin-bottom: 1rem; }
 
-    .nav-links a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.25s;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
-
-    /* Shop Hero */
-    .shop-hero {
-      padding: 110px 5% 80px;
-      text-align: center;
-    }
-
-    .shop-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      margin-bottom: 1rem;
-    }
-
-    /* Shop Grid */
     .shop-grid {
       max-width: 1400px;
       margin: 0 auto;
@@ -123,12 +69,9 @@
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.07);
       transition: all 0.3s;
+      cursor: pointer;
     }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
     .product-card img {
       width: 100%;
@@ -136,54 +79,68 @@
       object-fit: cover;
     }
 
-    .product-info {
-      padding: 1.6rem;
-    }
+    .product-info { padding: 1.6rem; }
+    .product-info h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+    .price { font-size: 1.55rem; font-weight: 700; color: var(--accent); margin: 0.8rem 0; }
 
-    .product-info h3 {
-      font-size: 1.35rem;
-      margin-bottom: 0.6rem;
-      line-height: 1.3;
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
     }
+    .modal-content {
+      background: white;
+      max-width: 500px;
+      width: 90%;
+      border-radius: var(--radius);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .close { font-size: 2rem; cursor: pointer; }
 
-    .price {
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin: 0.8rem 0 1rem;
+    .modal-body { padding: 1.5rem; }
+    label { display: block; margin: 1rem 0 0.5rem; font-weight: 600; }
+
+    select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
     }
 
     .btn {
       display: block;
-      padding: 1rem 2rem;
+      width: 100%;
+      padding: 1.1rem;
+      margin-top: 1.5rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border-radius: 50px;
-      text-decoration: none;
       text-align: center;
-      transition: all 0.3s;
+      text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
-    .btn:hover {
-      background: var(--accent-dark);
-      transform: translateY(-3px);
-    }
+    .btn:hover { background: var(--accent-dark); }
 
     @media (max-width: 768px) {
       .nav-links {
-        position: fixed;
-        top: 0; right: 0; bottom: 0;
-        width: 70%;
-        background: #1a3c2e;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.4s ease;
-        z-index: 999;
+        position: fixed; top: 0; right: 0; bottom: 0; width: 70%;
+        background: #1a3c2e; flex-direction: column; justify-content: center; align-items: center;
+        transform: translateX(100%); transition: transform 0.4s ease; z-index: 999;
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
@@ -208,57 +165,53 @@
 
   <section class="shop-hero">
     <h1>Our Shop</h1>
-    <p style="font-size: 1.35rem; color: var(--text-medium); max-width: 700px; margin: 0 auto;">
-      High-quality 3D printed products • Ready to ship from Texas
-    </p>
+    <p style="font-size: 1.35rem; color: var(--text-medium);">Click any product for details and ordering</p>
   </section>
 
   <div class="shop-grid">
     <!-- DuckTrooper -->
-    <div class="product-card">
-      <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper Figurine">
+    <div class="product-card" onclick="openModal(0)">
+      <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
       <div class="product-info">
         <h3>DuckTrooper Figurine</h3>
-        <p style="color: var(--text-medium); font-size: 0.95rem; margin-bottom: 1rem;">Star Wars rubber duck hybrid – collectible & fun!</p>
         <div class="price">$45</div>
-        <a href="https://paypal.me/YOURPAYPALUSERNAME/45" class="btn">Buy with PayPal</a>
       </div>
     </div>
 
-    <!-- SD Card Organizer -->
-    <div class="product-card">
-      <img src="https://i.etsystatic.com/56737607/r/il/2e987d/7929785713/il_fullxfull.7929785713_d9qy.jpg" alt="SD Card Organizer">
-      <div class="product-info">
-        <h3>SD & microSD Card Organizer (Altoids Tin)</h3>
-        <p style="color: var(--text-medium); font-size: 0.95rem; margin-bottom: 1rem;">Fits perfectly in an Altoids tin – customizable</p>
-        <div class="price">$5.99</div>
-        <a href="https://paypal.me/YOURPAYPALUSERNAME/5.99" class="btn">Buy with PayPal</a>
+    <!-- Add more cards here later -->
+  </div>
+
+  <!-- Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle"></h2>
+        <span class="close" onclick="closeModal()">×</span>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" style="width:100%; border-radius:12px; margin-bottom:1rem;" alt="">
+        
+        <form id="orderForm">
+          <input type="hidden" id="productName" name="product">
+
+          <label>Duck Body Color</label>
+          <select id="color" name="color">
+            <option value="Yellow">Yellow</option>
+            <option value="White">White</option>
+            <option value="Black">Black</option>
+            <option value="Orange">Orange</option>
+            <option value="Red">Red</option>
+            <option value="Purple">Purple</option>
+            <option value="Blue">Blue</option>
+          </select>
+
+          <label>Special Requests / Notes</label>
+          <textarea name="notes" rows="4" placeholder="Any custom requests..."></textarea>
+
+          <button type="button" onclick="submitOrder()" class="btn">Submit Order Request → Pay with PayPal</button>
+        </form>
       </div>
     </div>
-
-    <!-- Fishing Rod Holder Set -->
-    <div class="product-card">
-      <img src="https://i.etsystatic.com/56737607/r/il/c73efa/6852667140/il_fullxfull.6852667140_753p.jpg" alt="Fishing Rod Holder">
-      <div class="product-info">
-        <h3>Fishing Rod Holder (Set of 2)</h3>
-        <p style="color: var(--text-medium); font-size: 0.95rem; margin-bottom: 1rem;">Garage door / wall mounted – multiple sizes</p>
-        <div class="price">$16.99</div>
-        <a href="https://paypal.me/YOURPAYPALUSERNAME/16.99" class="btn">Buy with PayPal</a>
-      </div>
-    </div>
-
-    <!-- NFC Dog Tag -->
-    <div class="product-card">
-      <img src="https://i.etsystatic.com/56737607/r/il/5d42e8/8084990703/il_fullxfull.8084990703_epai.jpg" alt="NFC Dog Tag">
-      <div class="product-info">
-        <h3>Custom NFC Dog Tag</h3>
-        <p style="color: var(--text-medium); font-size: 0.95rem; margin-bottom: 1rem;">Smart programmable pet ID tag</p>
-        <div class="price">$12</div>
-        <a href="https://paypal.me/YOURPAYPALUSERNAME/12" class="btn">Buy with PayPal</a>
-      </div>
-    </div>
-
-    <!-- Add more cards easily if you want -->
   </div>
 
   <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8;">
@@ -267,23 +220,52 @@
       <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
       <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
     </p>
-    <p>Proudly based in Cedar Park, Texas – Worldwide shipping</p>
   </footer>
 
   <script>
+    const modal = document.getElementById('productModal');
+    let currentProduct = "";
+
+    function openModal(index) {
+      currentProduct = "DuckTrooper Figurine";
+      document.getElementById('modalTitle').textContent = currentProduct;
+      document.getElementById('modalImage').src = "https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg";
+      document.getElementById('productName').value = currentProduct;
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function submitOrder() {
+      const form = document.getElementById('orderForm');
+      const formData = new FormData(form);
+      formData.append('access_key', 'YOUR_WEB3FORMS_KEY'); // We'll set this up if needed
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert("Order request received! We'll contact you shortly.\n\nYou can now pay via PayPal.");
+        window.open('https://paypal.me/MimsSolutions/45', '_blank');
+        closeModal();
+      })
+      .catch(error => {
+        alert("Thank you! Please send payment via PayPal and we'll get started.");
+        window.open('https://paypal.me/MimsSolutions/45', '_blank');
+        closeModal();
+      });
+    }
+
+    // Mobile menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
-
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-    });
-
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-        menuToggle.textContent = '☰';
-      });
     });
   </script>
 </body>
