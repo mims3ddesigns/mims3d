@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18035820566');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18035820566');
+  </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shop • Mims Solutions</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-light: #F8F9F6;
-      --text-dark: #1F2521;
       --accent: #0D9488;
-      --card-bg: #FFFFFF;
-      --border: #E2E8E0;
-      --radius: 16px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
       font-family: 'Inter', sans-serif; 
-      background: var(--bg-light); 
-      color: var(--text-dark); 
-      line-height: 1.6;
+      background: #F8F9F6; 
+      color: #1F2521; 
     }
 
     header { 
@@ -54,50 +45,70 @@
 
     .product-card {
       background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       cursor: pointer;
-      transition: all 0.3s;
     }
-    .product-card:hover { transform: translateY(-8px); }
-
+    .product-card:hover { transform: translateY(-6px); }
     .product-card img { width: 100%; height: 250px; object-fit: cover; }
     .product-info { padding: 1.5rem; text-align: center; }
-    .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); margin: 0.5rem 0; }
+    .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
 
-    /* Simple Modal */
+    /* Improved Smaller Modal */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.75);
       z-index: 2000;
       align-items: center;
       justify-content: center;
+      padding: 20px;
     }
     .modal-content {
       background: white;
-      width: 90%;
-      max-width: 420px;
-      border-radius: var(--radius);
-      padding: 1.5rem;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
-    .close { float: right; font-size: 2rem; cursor: pointer; }
+    .modal-header {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .close {
+      font-size: 2rem;
+      cursor: pointer;
+      width: 40px;
+      text-align: center;
+    }
 
+    .modal-body { padding: 1.5rem; }
     label { display: block; margin: 1rem 0 0.5rem; font-weight: 600; }
-    select, input, textarea { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 8px; }
+    select, input, textarea { 
+      width: 100%; 
+      padding: 0.9rem; 
+      border: 1px solid #ccc; 
+      border-radius: 8px; 
+      font-size: 1rem;
+    }
 
     .btn {
       width: 100%;
-      padding: 1rem;
+      padding: 1.1rem;
       margin-top: 1.5rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border: none;
       border-radius: 50px;
+      font-size: 1.1rem;
       cursor: pointer;
     }
   </style>
@@ -131,28 +142,31 @@
   <!-- Modal -->
   <div id="modal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">×</span>
-      <h2>DuckTrooper Figurine - $45</h2>
-      
-      <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" style="width:100%; border-radius:12px; margin:1rem 0;" alt="">
+      <div class="modal-header">
+        <h2>DuckTrooper Figurine — $45</h2>
+        <span class="close" onclick="closeModal()">×</span>
+      </div>
+      <div class="modal-body">
+        <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" style="width:100%; border-radius:12px; margin-bottom:1rem;" alt="">
 
-      <label>Duck Body Color</label>
-      <select id="color">
-        <option>Yellow</option>
-        <option>White</option>
-        <option>Black</option>
-        <option>Orange</option>
-        <option>Red</option>
-        <option>Purple</option>
-      </select>
+        <label>Duck Body Color</label>
+        <select id="color">
+          <option>Yellow</option>
+          <option>White</option>
+          <option>Black</option>
+          <option>Orange</option>
+          <option>Red</option>
+          <option>Purple</option>
+        </select>
 
-      <label>Quantity</label>
-      <input type="number" id="qty" value="1" min="1">
+        <label>Quantity</label>
+        <input type="number" id="qty" value="1" min="1">
 
-      <label>Notes / Shipping Info</label>
-      <textarea id="notes" rows="3" placeholder="Any special requests..."></textarea>
+        <label>Notes / Shipping Info</label>
+        <textarea id="notes" rows="3" placeholder="Any special requests..."></textarea>
 
-      <button onclick="submitOrder()" class="btn">Submit Request & Pay with PayPal</button>
+        <button onclick="submitOrder()" class="btn">Submit Request & Pay with PayPal</button>
+      </div>
     </div>
   </div>
 
@@ -168,10 +182,8 @@
     function submitOrder() {
       const color = document.getElementById('color').value;
       const qty = document.getElementById('qty').value;
-      const notes = document.getElementById('notes').value;
-
-      alert(`Order Request Received!\n\nProduct: DuckTrooper Figurine\nColor: ${color}\nQuantity: ${qty}\n\nRedirecting to PayPal...`);
       
+      alert(`Order Request:\nDuckTrooper Figurine\nColor: ${color}\nQuantity: ${qty}\n\nRedirecting to PayPal...`);
       window.open('https://paypal.me/MimsSolutions/45', '_blank');
       closeModal();
     }
