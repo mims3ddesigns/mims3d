@@ -68,26 +68,28 @@
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
     main {
-      padding-top: 220px;   /* Increased padding */
+      padding-top: 260px;   /* ← Increased again for safety */
       max-width: 900px;
       margin: 0 auto;
-      padding: 0 5%;
+      padding-left: 5%;
+      padding-right: 5%;
     }
 
     h1 { 
       font-family: 'Playfair Display', serif; 
       font-size: 3.2rem; 
       text-align: center; 
+      margin-bottom: 0.5rem;
     }
     .price { 
       font-size: 2rem; 
       color: var(--accent); 
       text-align: center; 
-      margin: 1rem 0; 
+      margin-bottom: 2rem; 
     }
 
     img { 
-      max-width: 380px; 
+      max-width: 420px; 
       width: 100%; 
       border-radius: 12px; 
       display: block; 
@@ -99,6 +101,7 @@
       padding: 2.5rem; 
       border-radius: 16px; 
       border: 1px solid #E2E8E0; 
+      margin-top: 2rem;
     }
 
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
@@ -133,7 +136,7 @@
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      main { padding-top: 130px; }
+      main { padding-top: 140px; }
     }
   </style>
 </head>
