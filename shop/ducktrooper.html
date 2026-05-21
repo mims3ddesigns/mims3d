@@ -60,11 +60,20 @@
 
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
 
+    /* Hamburger hidden on desktop */
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+    }
+
     main {
-      padding-top: 140px;
+      padding-top: 180px;   /* Extra space to prevent overlap */
       max-width: 900px;
       margin: 0 auto;
-      padding: 0 5%;
+      padding-left: 5%;
+      padding-right: 5%;
     }
 
     h1 { 
@@ -79,9 +88,8 @@
       margin: 1rem 0; 
     }
 
-    /* Smaller image on desktop */
     img { 
-      max-width: 380px;     /* Reduced from 520px */
+      max-width: 380px; 
       width: 100%; 
       border-radius: 12px; 
       display: block; 
@@ -115,7 +123,7 @@
       cursor: pointer; 
     }
 
-    /* Mobile adjustments */
+    /* Mobile Menu */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -131,7 +139,7 @@
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      main { padding-top: 120px; }
+      main { padding-top: 130px; }
       img { max-width: 320px; }
     }
   </style>
