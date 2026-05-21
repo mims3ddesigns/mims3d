@@ -25,38 +25,10 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
 
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--accent);
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #000;
-      letter-spacing: -1.2px;
-    }
-    .nav-links a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-      margin-left: 2rem;
-    }
+    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; letter-spacing: -1.2px; }
+    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; margin-left: 2rem; }
     .nav-links a:hover { color: #fff; }
 
     .product-hero { padding: 110px 5% 60px; max-width: 1100px; margin: 0 auto; }
@@ -107,7 +79,7 @@
     <a href="../shop.html" class="back-btn">← Back to Shop</a>
     
     <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">DuckTrooper Figurine</h1>
-    <p style="font-size: 2rem; font-weight: 700; color: var(--accent);">$45 each</p>
+    <p style="font-size: 2rem; font-weight: 700; color: var(--accent);">$5 each</p>
 
     <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" 
          style="width:100%; max-width:700px; border-radius:16px; margin:2rem 0;" alt="DuckTrooper">
@@ -154,6 +126,7 @@
   </div>
 
   <script>
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
