@@ -12,7 +12,6 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mims Solutions: Custom 3D printing, rapid prototyping, and design consulting.">
   <title>Mims Solutions • Additive Manufacturing</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -25,9 +24,14 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: var(--bg-light); 
+      color: var(--text-dark); 
+      line-height: 1.6;
+    }
 
-    /* Header - No Hamburger on Desktop */
+    /* Consistent Header */
     header {
       position: fixed;
       top: 0;
@@ -46,14 +50,10 @@
     }
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
+      font-size: 2.25rem;
       font-weight: 700;
       color: #000;
       letter-spacing: -1.2px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
     }
     .nav-links a {
       color: #000;
@@ -63,39 +63,19 @@
       font-size: 0.95rem;
       letter-spacing: 1px;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    /* Cart Icon */
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    /* Hero */
-    .hero {
-      padding: 110px 5% 60px;
-      text-align: center;
-    }
-    .hero h1 {
+    /* Typography Consistency */
+    h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 4.2rem);
-      font-weight: 700;
+      font-size: clamp(3.2rem, 7vw, 5.5rem);
       margin-bottom: 0.8rem;
-      letter-spacing: -1.5px;
     }
     .subtitle {
-      font-size: 1.35rem;
+      font-size: 1.15rem;
       color: #47555E;
-      margin-bottom: 2rem;
     }
+
     .content-box {
       background: white;
       border: 1px solid #E2E8E0;
@@ -108,9 +88,7 @@
     .printer-img {
       max-width: 420px;
       width: 100%;
-      height: auto;
       border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
       margin: 1.8rem auto;
       display: block;
     }
@@ -123,33 +101,23 @@
       border-radius: 50px;
       text-decoration: none;
     }
-
-    @media (max-width: 768px) {
-      .hero { padding-top: 100px; }
-    }
   </style>
 </head>
 <body>
 
   <header>
-  <nav>
-    <div class="logo">Mims Solutions</div>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">HOME</a>
-      <a href="services.html">SERVICES</a>
-      <a href="shop.html">SHOP</a>
-      <a href="about.html">ABOUT</a>
-      <a href="contact.html">CONTACT</a>
-    </div>
-    
-    <!-- Cart Icon -->
-    <a href="cart.html" class="cart-icon">
-      🛒 <span id="cart-count">0</span>
-    </a>
-
-    <div class="menu-toggle" id="menuToggle">☰</div>
-  </nav>
-</header>
+    <nav>
+      <div class="logo">Mims Solutions</div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="active">HOME</a>
+        <a href="services.html">SERVICES</a>
+        <a href="shop.html">SHOP</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+      </div>
+      <a href="cart.html" style="font-size:1.5rem; text-decoration:none;">🛒 <span id="cart-count">0</span></a>
+    </nav>
+  </header>
 
   <section class="hero">
     <div class="hero-content">
@@ -171,23 +139,13 @@
     </div>
   </section>
 
- <script>
-  // Mobile Menu
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-    menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-  });
-
-  // Cart count
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const countEl = document.getElementById('cart-count');
-    if (countEl) countEl.textContent = cart.length;
-  }
-
-  window.onload = updateCartCount;
-</script>
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
+    window.onload = updateCartCount;
+  </script>
 </body>
 </html>
