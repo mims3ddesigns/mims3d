@@ -22,7 +22,6 @@
       --text-dark: #1F2521;
       --accent: #0D9488;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
       font-family: 'Inter', sans-serif; 
@@ -31,7 +30,7 @@
       line-height: 1.7;
     }
 
-    /* Header - Exact match to About.html */
+    /* Header */
     header {
       position: fixed;
       top: 0;
@@ -53,11 +52,6 @@
       font-size: 2.25rem;
       font-weight: 700;
       color: #000;
-      letter-spacing: -1.2px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
     }
     .nav-links a {
       color: #000;
@@ -66,36 +60,18 @@
       text-transform: uppercase;
       font-size: 0.95rem;
       letter-spacing: 1px;
+      margin-left: 2rem;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
+    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
     main {
-      padding-top: 140px;
+      padding-top: 180px;
       max-width: 1000px;
       margin: 0 auto;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-bottom: 6rem;
+      padding: 0 5% 6rem;
     }
 
     h1 {
@@ -139,6 +115,8 @@
     }
 
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
+    .required::after { content: " *"; color: red; }
+
     input, textarea, select {
       width: 100%;
       padding: 1rem;
@@ -159,6 +137,7 @@
       cursor: pointer;
     }
 
+    /* Mobile Menu */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -174,7 +153,7 @@
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      main { padding-top: 120px; }
+      main { padding-top: 130px; }
     }
   </style>
 </head>
@@ -191,10 +170,7 @@
         <a href="../contact.html">CONTACT</a>
       </div>
       
-      <a href="../cart.html" class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </a>
-
+      <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
@@ -212,20 +188,32 @@
       <input type="hidden" name="cart_summary" id="cart_summary">
       <input type="hidden" name="grand_total" id="grand_total_input">
 
-      <label>Full Name</label>
+      <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
-      <label>Email Address</label>
+      <label>Company Name (optional)</label>
+      <input type="text" name="company">
+
+      <label class="required">Email Address</label>
       <input type="email" name="email" required>
 
-      <label>Phone Number</label>
+      <label class="required">Phone Number</label>
       <input type="tel" name="phone" required>
 
-      <label>Shipping Address</label>
-      <textarea name="address" rows="4" placeholder="Street, City, State, ZIP Code" required></textarea>
+      <label class="required">Street Address</label>
+      <input type="text" name="street" required>
+
+      <label>Apartment, Suite, Unit (optional)</label>
+      <input type="text" name="apt">
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
+        <div><label class="required">City</label><input type="text" name="city" required></div>
+        <div><label class="required">State</label><input type="text" name="state" required></div>
+        <div><label class="required">ZIP Code</label><input type="text" name="zip" required></div>
+      </div>
 
       <label>Order Notes (optional)</label>
-      <textarea name="notes" rows="3"></textarea>
+      <textarea name="notes" rows="4" placeholder="Gift message, special instructions..."></textarea>
 
       <button type="submit">Submit Order & Pay with PayPal</button>
     </form>
@@ -250,11 +238,11 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * (item.quantity || 1);
         subtotal += itemTotal;
-        summary += `${item.quantity || 1}x ${item.name} - $${itemTotal.toFixed(2)}\n`;
+        summary += `${item.quantity || 1}x ${item.name} (${item.color || 'N/A'}) - $${itemTotal.toFixed(2)}\n`;
 
         container.innerHTML += `
           <div class="cart-item">
-            <div><strong>${item.name}</strong><br>Qty: ${item.quantity || 1}</div>
+            <div><strong>${item.name}</strong><br>Color: ${item.color || 'N/A'} × ${item.quantity || 1}</div>
             <div style="text-align:right;">
               $${itemTotal.toFixed(2)}<br>
               <small onclick="removeFromCart(${index})" style="color:red; cursor:pointer;">Remove</small>
