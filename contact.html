@@ -32,7 +32,7 @@
       line-height: 1.7;
     }
 
-    /* Consistent Header - Matching About page */
+    /* Header - Matching About.html */
     header {
       position: fixed;
       top: 0;
@@ -73,7 +73,6 @@
       color: #fff;
     }
 
-    /* Cart Icon */
     .cart-icon {
       display: flex;
       align-items: center;
@@ -84,8 +83,15 @@
       font-weight: 600;
     }
 
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+    }
+
     main {
-      padding-top: 160px;   /* Fixed spacing so content isn't cut off */
+      padding-top: 140px;
       max-width: 900px;
       margin: 0 auto;
       padding-left: 5%;
@@ -133,6 +139,31 @@
       margin: 4rem 0 2rem;
       font-size: 1.2rem;
     }
+
+    /* ==================== MOBILE MENU ==================== */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: 70%;
+        background: #1a3c2e;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+      }
+      .nav-links.show {
+        transform: translateX(0);
+      }
+      .menu-toggle {
+        display: block;
+      }
+      main {
+        padding-top: 120px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -152,6 +183,8 @@
       <a href="cart.html" class="cart-icon">
         🛒 <span id="cart-count">0</span>
       </a>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
 
@@ -187,7 +220,15 @@
   </main>
 
   <script>
-    // Update cart count
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    });
+
+    // Cart count
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
