@@ -45,8 +45,30 @@
     .nav-links a:hover { color: #fff; }
 
     .cart-container { max-width: 1000px; margin: 2rem auto; padding: 0 5%; }
-    .cart-item { background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; }
-    .total { font-size: 1.9rem; font-weight: 700; text-align: right; margin: 2rem 0; color: var(--accent); }
+    .cart-item { 
+      background: white; padding: 1.5rem; border-radius: 12px; 
+      margin-bottom: 1rem; display: flex; justify-content: space-between; 
+    }
+
+    .price-breakdown {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      font-size: 1.1rem;
+    }
+    .price-breakdown div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+    .grand-total {
+      font-size: 1.9rem;
+      font-weight: 700;
+      text-align: right;
+      color: var(--accent);
+      margin-top: 1rem;
+    }
 
     label { display: block; margin: 1rem 0 0.3rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
@@ -63,16 +85,6 @@
       font-size: 1.1rem;
       cursor: pointer;
       margin-top: 1.5rem;
-    }
-
-    #successMessage { 
-      display: none; 
-      background: #d4edda; 
-      color: #155724; 
-      padding: 3rem; 
-      border-radius: 16px; 
-      text-align: center; 
-      margin-top: 2rem;
     }
   </style>
 </head>
@@ -95,7 +107,9 @@
   <div class="cart-container">
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
-    <div class="total" id="grand-total">Calculating...</div>
+
+    <div class="price-breakdown" id="price-breakdown"></div>
+    <div class="grand-total" id="grand-total">Grand Total: $0.00</div>
 
     <h2 style="margin-top: 3rem;">Shipping & Order Information</h2>
 
@@ -105,6 +119,7 @@
       <input type="hidden" name="cart_summary" id="cart_summary">
       <input type="hidden" name="grand_total" id="grand_total_input">
 
+      <!-- Your form fields stay the same -->
       <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
@@ -134,14 +149,6 @@
 
       <button type="submit" class="btn">Submit Order & Pay with PayPal</button>
     </form>
-
-    <div id="successMessage">
-      <h2>Thank You! Order Received</h2>
-      <p>We'll review your order and contact you shortly.</p>
-      <a id="paypalLink" href="#" target="_blank" class="btn" style="background:#003087; color:white;">
-        Pay with PayPal Now
-      </a>
-    </div>
   </div>
 
   <script>
@@ -178,6 +185,13 @@
       const shipping = 7;
       grandTotal = subtotal + tax + shipping;
 
+      // Price Breakdown
+      document.getElementById('price-breakdown').innerHTML = `
+        <div>Subtotal: $${subtotal.toFixed(2)}</div>
+        <div>Sales Tax (6.25%): $${tax.toFixed(2)}</div>
+        <div>Shipping: $7.00</div>
+      `;
+
       document.getElementById('grand-total').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
       document.getElementById('cart_summary').value = summary;
       document.getElementById('grand_total_input').value = grandTotal.toFixed(2);
@@ -190,13 +204,14 @@
       loadCart();
     }
 
+    // Form submit
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
       e.preventDefault();
       fetch(this.action, { method: 'POST', body: new FormData(this) })
         .then(() => {
           this.style.display = 'none';
-          document.getElementById('successMessage').style.display = 'block';
-          document.getElementById('paypalLink').href = `https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`;
+          alert("Order submitted successfully! Redirecting to PayPal...");
+          window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
         });
     });
 
