@@ -17,15 +17,44 @@
   
   <style>
     :root { --accent: #0D9488; }
-    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; padding-top: 90px; line-height: 1.6; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      padding-top: 90px; 
+      line-height: 1.6;
+    }
 
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
+    /* Fixed Header - Matching your site */
+    header { 
+      position: fixed; top: 0; width: 100%; background: var(--accent); 
+      z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+    }
+    nav { 
+      max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; 
+      display: flex; justify-content: space-between; align-items: center; 
+    }
+    .logo { 
+      font-family: 'Playfair Display', serif; font-size: 2.25rem; 
+      font-weight: 700; color: #000; letter-spacing: -1.2px; 
+    }
+    .nav-links a { 
+      color: #000; font-weight: 600; text-decoration: none; 
+      text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; 
+      margin-left: 2rem; 
+    }
+    .nav-links a:hover { color: #fff; }
 
     .cart-container { max-width: 1000px; margin: 2rem auto; padding: 0 5%; }
-    .cart-item { background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; }
-    .total { font-size: 1.9rem; font-weight: 700; text-align: right; margin: 2rem 0; color: var(--accent); }
+    .cart-item { 
+      background: white; padding: 1.5rem; border-radius: 12px; 
+      margin-bottom: 1rem; display: flex; justify-content: space-between; 
+    }
+    .totals { font-size: 1.1rem; line-height: 1.8; margin: 1.5rem 0; }
+    .grand-total { 
+      font-size: 1.9rem; font-weight: 700; text-align: right; 
+      margin: 2rem 0; color: var(--accent); 
+    }
 
     label { display: block; margin: 1rem 0 0.3rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
@@ -45,13 +74,8 @@
     }
 
     #successMessage { 
-      display: none; 
-      background: #d4edda; 
-      color: #155724; 
-      padding: 3rem; 
-      border-radius: 16px; 
-      text-align: center; 
-      margin-top: 2rem;
+      display: none; background: #d4edda; color: #155724; 
+      padding: 3rem; border-radius: 16px; text-align: center; margin-top: 2rem;
     }
   </style>
 </head>
@@ -74,11 +98,13 @@
   <div class="cart-container">
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
-    <div class="total" id="grand-total">Calculating...</div>
+
+    <div class="totals" id="totals"></div>
+    <div class="grand-total" id="grand-total">Grand Total: $0.00</div>
 
     <h2 style="margin-top: 3rem;">Shipping & Order Information</h2>
 
-    <form id="checkoutForm">
+    <form id="checkoutForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New Order from Cart">
       <input type="hidden" name="cart_summary" id="cart_summary">
@@ -158,6 +184,11 @@
       const shipping = 7;
       grandTotal = subtotal + tax + shipping;
 
+      document.getElementById('totals').innerHTML = `
+        Subtotal: $${subtotal.toFixed(2)}<br>
+        Sales Tax (6.25%): $${tax.toFixed(2)}<br>
+        Shipping: $7.00
+      `;
       document.getElementById('grand-total').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
       document.getElementById('cart_summary').value = summary;
       document.getElementById('grand_total_input').value = grandTotal.toFixed(2);
@@ -170,18 +201,15 @@
       loadCart();
     }
 
-    // Form submission
+    // Form submit
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: new FormData(this)
-      }).then(() => {
-        document.getElementById('checkoutForm').style.display = 'none';
-        document.getElementById('successMessage').style.display = 'block';
-        document.getElementById('paypalLink').href = `https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`;
-      });
+      fetch(this.action, { method: 'POST', body: new FormData(this) })
+        .then(() => {
+          document.getElementById('checkoutForm').style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          document.getElementById('paypalLink').href = `https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`;
+        });
     });
 
     // Mobile Menu
