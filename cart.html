@@ -44,7 +44,15 @@
       margin-top: 1.5rem;
     }
 
-    #successMessage { display: none; background: #d4edda; padding: 3rem; border-radius: 16px; text-align: center; margin-top: 2rem; }
+    #successMessage { 
+      display: none; 
+      background: #d4edda; 
+      color: #155724; 
+      padding: 3rem; 
+      border-radius: 16px; 
+      text-align: center; 
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -76,7 +84,6 @@
       <input type="hidden" name="cart_summary" id="cart_summary">
       <input type="hidden" name="grand_total" id="grand_total_input">
 
-      <!-- Form fields (same as before) -->
       <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
@@ -109,9 +116,9 @@
 
     <!-- Success Message -->
     <div id="successMessage">
-      <h2>Thank You!</h2>
-      <p>Your order has been received. We'll contact you shortly.</p>
-      <a id="paypalButton" href="#" target="_blank" class="btn" style="background:#003087; color:white;">
+      <h2>Thank You! Order Received</h2>
+      <p>We'll review your order and contact you shortly.</p>
+      <a id="paypalLink" href="#" target="_blank" class="btn" style="background:#003087; color:white;">
         Pay with PayPal Now
       </a>
     </div>
@@ -163,13 +170,21 @@
       loadCart();
     }
 
-    // Form submission handler
+    // Form submit handler
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
-      setTimeout(() => {
+      e.preventDefault(); // Prevent default redirect
+
+      // Submit the form via fetch
+      fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this)
+      }).then(() => {
+        // Show success
         document.getElementById('checkoutForm').style.display = 'none';
-        document.getElementById('successMessage').style.display = 'block';
-        document.getElementById('paypalButton').href = `https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`;
-      }, 600);
+        const successMsg = document.getElementById('successMessage');
+        successMsg.style.display = 'block';
+        document.getElementById('paypalLink').href = `https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`;
+      });
     });
 
     // Mobile Menu
