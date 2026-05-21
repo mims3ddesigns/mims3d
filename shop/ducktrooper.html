@@ -25,7 +25,6 @@
       line-height: 1.7;
     }
 
-    /* Header - Matching About.html */
     header {
       position: fixed;
       top: 0;
@@ -47,41 +46,19 @@
       font-size: 2.25rem;
       font-weight: 700;
       color: #000;
-      letter-spacing: -1.2px;
     }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
+
     .nav-links a {
       color: #000;
       font-weight: 600;
       text-decoration: none;
       text-transform: uppercase;
       font-size: 0.95rem;
-      letter-spacing: 1px;
+      margin-left: 2rem;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
 
     main {
       padding-top: 140px;
@@ -101,8 +78,10 @@
       text-align: center; 
       margin: 1rem 0; 
     }
+
+    /* Smaller image on desktop */
     img { 
-      max-width: 520px; 
+      max-width: 380px;     /* Reduced from 520px */
       width: 100%; 
       border-radius: 12px; 
       display: block; 
@@ -115,6 +94,7 @@
       border-radius: 16px; 
       border: 1px solid #E2E8E0; 
     }
+
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
     input, select, textarea { 
@@ -135,7 +115,7 @@
       cursor: pointer; 
     }
 
-    /* ==================== MOBILE MENU ==================== */
+    /* Mobile adjustments */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -152,6 +132,7 @@
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
       main { padding-top: 120px; }
+      img { max-width: 320px; }
     }
   </style>
 </head>
@@ -168,10 +149,7 @@
         <a href="../contact.html">CONTACT</a>
       </div>
       
-      <a href="../cart.html" class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </a>
-
+      <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
@@ -253,20 +231,8 @@
       })
       .then(() => {
         window.open(`https://paypal.me/MimsSolutions/${total}`, '_blank');
-      })
-      .catch(err => {
-        alert("Something went wrong. Please try again.");
-        console.error(err);
       });
     });
-
-    // Cart count
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const countEl = document.getElementById('cart-count');
-      if (countEl) countEl.textContent = cart.length;
-    }
-    window.onload = updateCartCount;
   </script>
 </body>
 </html>
