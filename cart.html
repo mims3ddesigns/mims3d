@@ -16,16 +16,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <style>
-    :root {
-      --accent: #0D9488;
-    }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: #F8F9F6; 
-      color: #1F2521; 
-      padding-top: 90px; 
-      line-height: 1.6;
-    }
+    :root { --accent: #0D9488; }
+    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; padding-top: 90px; line-height: 1.6; }
+
     header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
@@ -41,7 +34,8 @@
     }
     .total { font-size: 1.8rem; font-weight: 700; text-align: right; margin: 2rem 0; color: var(--accent); }
 
-    label { display: block; margin: 1rem 0 0.5rem; font-weight: 600; }
+    label { display: block; margin: 1rem 0 0.3rem; font-weight: 600; }
+    .required::after { content: " *"; color: red; }
     input, textarea, select { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
 
     .btn {
@@ -77,7 +71,6 @@
   <div class="cart-container">
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
-    
     <div class="total" id="cart-total">Total: $0.00 + $7 Shipping</div>
 
     <h2 style="margin-top: 3rem;">Shipping & Order Information</h2>
@@ -85,20 +78,21 @@
     <form id="checkoutForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New Order from Cart">
+      <input type="hidden" name="cart_items" id="cart_items">
 
-      <label>Full Name</label>
+      <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
       <label>Company Name (optional)</label>
       <input type="text" name="company">
 
-      <label>Email Address</label>
+      <label class="required">Email Address</label>
       <input type="email" name="email" required>
 
-      <label>Phone Number</label>
+      <label class="required">Phone Number</label>
       <input type="tel" name="phone" required>
 
-      <label>Street Address</label>
+      <label class="required">Street Address</label>
       <input type="text" name="street" required>
 
       <label>Apartment, Suite, Unit, etc. (optional)</label>
@@ -106,15 +100,15 @@
 
       <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
         <div>
-          <label>City</label>
+          <label class="required">City</label>
           <input type="text" name="city" required>
         </div>
         <div>
-          <label>State</label>
+          <label class="required">State</label>
           <input type="text" name="state" required>
         </div>
         <div>
-          <label>ZIP Code</label>
+          <label class="required">ZIP Code</label>
           <input type="text" name="zip" required>
         </div>
       </div>
@@ -131,6 +125,7 @@
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       const container = document.getElementById('cart-items');
       let total = 0;
+      let cartSummary = "";
 
       container.innerHTML = '';
 
@@ -142,6 +137,8 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
+
+        cartSummary += `${item.quantity}x ${item.name} (${item.color}) - $${itemTotal}\n`;
 
         container.innerHTML += `
           <div class="cart-item">
@@ -157,6 +154,7 @@
       });
 
       document.getElementById('cart-total').textContent = `Total: $${total} + $7 Shipping`;
+      document.getElementById('cart_items').value = cartSummary;
     }
 
     function removeFromCart(index) {
