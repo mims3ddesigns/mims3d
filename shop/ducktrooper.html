@@ -31,7 +31,7 @@
       line-height: 1.7;
     }
 
-    /* Header - Exact match to About.html */
+    /* Header - Matching About.html */
     header {
       position: fixed;
       top: 0;
@@ -105,13 +105,14 @@
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3rem, 7vw, 5rem);
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
     .price {
       font-size: 2rem;
       color: var(--accent);
       font-weight: 700;
     }
+
     img {
       max-width: 520px;
       width: 100%;
@@ -128,22 +129,33 @@
       border: 1px solid #E2E8E0;
       margin-top: 2rem;
     }
-    label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
+
+    label { 
+      display: block; 
+      margin: 1.2rem 0 0.4rem; 
+      font-weight: 600; 
+    }
+    .required::after {
+      content: " *";
+      color: red;
+    }
+
     input, select, textarea {
       width: 100%;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
     button {
       width: 100%;
-      padding: 1.2rem;
+      padding: 1.3rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border: none;
       border-radius: 50px;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       margin-top: 2rem;
       cursor: pointer;
     }
@@ -191,7 +203,7 @@
   <main>
     <div class="product-hero">
       <h1>DuckTrooper</h1>
-      <p class="price">$8.00</p>
+      <p class="price">$8.00 each</p>
     </div>
 
     <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" 
@@ -201,7 +213,7 @@
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New DuckTrooper Order">
 
-      <label>Color</label>
+      <label class="required">Color</label>
       <select name="color" required>
         <option value="">Select Color</option>
         <option value="Yellow">Yellow</option>
@@ -213,25 +225,46 @@
         <option value="Purple">Purple</option>
       </select>
 
-      <label>Quantity</label>
+      <label class="required">Quantity</label>
       <input type="number" name="quantity" value="1" min="1" required>
 
-      <label>Your Name</label>
+      <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
-      <label>Email</label>
+      <label>Company Name (optional)</label>
+      <input type="text" name="company">
+
+      <label class="required">Email Address</label>
       <input type="email" name="email" required>
 
-      <label>Phone</label>
-      <input type="tel" name="phone">
+      <label class="required">Phone Number</label>
+      <input type="tel" name="phone" required>
 
-      <label>Shipping Address</label>
-      <textarea name="address" rows="3" placeholder="Street, City, State, ZIP" required></textarea>
+      <label class="required">Street Address</label>
+      <input type="text" name="street" required>
+
+      <label>Apartment, Suite, Unit (optional)</label>
+      <input type="text" name="apt">
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
+        <div>
+          <label class="required">City</label>
+          <input type="text" name="city" required>
+        </div>
+        <div>
+          <label class="required">State</label>
+          <input type="text" name="state" required>
+        </div>
+        <div>
+          <label class="required">ZIP Code</label>
+          <input type="text" name="zip" required>
+        </div>
+      </div>
 
       <label>Order Notes (optional)</label>
-      <textarea name="notes" rows="3"></textarea>
+      <textarea name="notes" rows="4" placeholder="Special instructions, gift message, etc."></textarea>
 
-      <button type="submit">Submit Order • Pay with PayPal</button>
+      <button type="submit">Submit Order & Pay with PayPal</button>
     </form>
   </main>
 
