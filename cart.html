@@ -12,7 +12,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DuckTrooper • Mims Solutions</title>
+  <title>Your Cart • Mims Solutions</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
@@ -98,27 +98,37 @@
       padding-bottom: 6rem;
     }
 
-    .product-hero {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3rem, 7vw, 5rem);
-      margin-bottom: 1rem;
+      text-align: center;
+      margin-bottom: 2rem;
     }
-    .price {
-      font-size: 2rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-    img {
-      max-width: 520px;
-      width: 100%;
+
+    .cart-item {
+      background: white;
+      padding: 1.5rem;
       border-radius: 12px;
-      margin: 2rem auto;
-      display: block;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price-breakdown {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      margin: 2rem 0;
+      font-size: 1.2rem;
+    }
+
+    .grand-total {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: right;
+      color: var(--accent);
+      margin: 1.5rem 0;
     }
 
     form {
@@ -126,24 +136,25 @@
       padding: 2.5rem;
       border-radius: 16px;
       border: 1px solid #E2E8E0;
-      margin-top: 2rem;
     }
+
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
-    input, select, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
     button {
       width: 100%;
-      padding: 1.2rem;
+      padding: 1.3rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border: none;
       border-radius: 50px;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       margin-top: 2rem;
       cursor: pointer;
     }
@@ -189,53 +200,99 @@
   </header>
 
   <main>
-    <div class="product-hero">
-      <h1>DuckTrooper</h1>
-      <p class="price">$8.00</p>
-    </div>
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
 
-    <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" 
-         alt="DuckTrooper Figurine">
+    <div class="price-breakdown" id="price-breakdown"></div>
+    <div class="grand-total" id="grand-total">Grand Total: $0.00</div>
 
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form id="checkoutForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
-      <input type="hidden" name="subject" value="New DuckTrooper Order">
+      <input type="hidden" name="subject" value="New Order from Cart">
+      <input type="hidden" name="cart_summary" id="cart_summary">
+      <input type="hidden" name="grand_total" id="grand_total_input">
 
-      <label>Color</label>
-      <select name="color" required>
-        <option value="">Select Color</option>
-        <option value="Yellow">Yellow</option>
-        <option value="White">White</option>
-        <option value="Red">Red</option>
-        <option value="Black">Black</option>
-        <option value="Green">Green</option>
-        <option value="Orange">Orange</option>
-        <option value="Purple">Purple</option>
-      </select>
-
-      <label>Quantity</label>
-      <input type="number" name="quantity" value="1" min="1" required>
-
-      <label>Your Name</label>
+      <label>Full Name</label>
       <input type="text" name="name" required>
 
-      <label>Email</label>
+      <label>Email Address</label>
       <input type="email" name="email" required>
 
-      <label>Phone</label>
-      <input type="tel" name="phone">
+      <label>Phone Number</label>
+      <input type="tel" name="phone" required>
 
       <label>Shipping Address</label>
-      <textarea name="address" rows="3" placeholder="Street, City, State, ZIP" required></textarea>
+      <textarea name="address" rows="4" placeholder="Street, City, State, ZIP Code" required></textarea>
 
       <label>Order Notes (optional)</label>
       <textarea name="notes" rows="3"></textarea>
 
-      <button type="submit">Submit Order • Pay with PayPal</button>
+      <button type="submit">Submit Order & Pay with PayPal</button>
     </form>
   </main>
 
   <script>
+    let grandTotal = 0;
+
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const container = document.getElementById('cart-items');
+      let subtotal = 0;
+      let summary = "";
+
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="text-align:center; font-size:1.3rem;">Your cart is empty.</p>';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * (item.quantity || 1);
+        subtotal += itemTotal;
+        summary += `${item.quantity || 1}x ${item.name} - $${itemTotal.toFixed(2)}\n`;
+
+        container.innerHTML += `
+          <div class="cart-item">
+            <div><strong>${item.name}</strong><br>Qty: ${item.quantity || 1}</div>
+            <div style="text-align:right;">
+              $${itemTotal.toFixed(2)}<br>
+              <small onclick="removeFromCart(${index})" style="color:red; cursor:pointer;">Remove</small>
+            </div>
+          </div>`;
+      });
+
+      const tax = subtotal * 0.0625;
+      const shipping = 7;
+      grandTotal = subtotal + tax + shipping;
+
+      document.getElementById('price-breakdown').innerHTML = `
+        <div>Subtotal: $${subtotal.toFixed(2)}</div>
+        <div>Sales Tax (6.25%): $${tax.toFixed(2)}</div>
+        <div>Shipping: $7.00</div>
+      `;
+      document.getElementById('grand-total').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
+      document.getElementById('cart_summary').value = summary;
+      document.getElementById('grand_total_input').value = grandTotal.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+
+    // Form submit
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      fetch(this.action, { method: 'POST', body: new FormData(this) })
+        .then(() => {
+          alert("Order submitted! Redirecting to PayPal...");
+          window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
+        });
+    });
+
     // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -244,12 +301,7 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const countEl = document.getElementById('cart-count');
-      if (countEl) countEl.textContent = cart.length;
-    }
-    window.onload = updateCartCount;
+    window.onload = loadCart;
   </script>
 </body>
 </html>
