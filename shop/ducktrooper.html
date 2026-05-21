@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18035820566');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18035820566');
+  </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -21,22 +20,47 @@
       --bg-light: #F8F9F6;
       --text-dark: #1F2521;
       --accent: #0D9488;
-      --accent-dark: #0B7A70;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
 
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; letter-spacing: -1.2px; }
-    .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
-    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--accent);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #000;
+      letter-spacing: -1.2px;
+    }
+    .nav-links a {
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      margin-left: 2rem;
+    }
+    .nav-links a:hover { color: #fff; }
 
     .product-hero { padding: 110px 5% 60px; max-width: 1100px; margin: 0 auto; }
-    .back-btn { color: var(--accent); text-decoration: none; font-weight: 600; margin-bottom: 1.5rem; display: inline-block; }
+    .back-btn { color: var(--accent); font-weight: 600; text-decoration: none; margin-bottom: 1rem; display: inline-block; }
 
     .product-info {
       background: white;
@@ -47,7 +71,7 @@
     }
 
     label { display: block; margin: 1.2rem 0 0.5rem; font-weight: 600; }
-    select, input, textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
+    select, input, textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
 
     .btn {
       width: 100%;
@@ -60,16 +84,6 @@
       font-size: 1.1rem;
       cursor: pointer;
       margin-top: 1.5rem;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e;
-        flex-direction:column; justify-content:center; align-items:center;
-        transform:translateX(100%); transition:0.4s; z-index:999;
-      }
-      .nav-links.show { transform: translateX(0); }
-      .menu-toggle { display: block; }
     }
   </style>
 </head>
@@ -95,16 +109,27 @@
     <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">DuckTrooper Figurine</h1>
     <p style="font-size: 2rem; font-weight: 700; color: var(--accent);">$45 each</p>
 
-    <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" style="width:100%; max-width:700px; border-radius:16px; margin:2rem 0;" alt="DuckTrooper">
+    <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" 
+         style="width:100%; max-width:700px; border-radius:16px; margin:2rem 0;" alt="DuckTrooper">
 
     <div class="product-info">
       <h2>Order This Item</h2>
-      <p>Fill out the details below. We’ll email you confirmation shortly.</p>
 
       <form action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
         <input type="hidden" name="subject" value="New DuckTrooper Order Request">
-        <input type="hidden" name="from_name" value="Mims Solutions Shop">
+
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email" required>
+
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required>
+
+        <label>Shipping Address</label>
+        <textarea name="address" rows="3" placeholder="Street, City, State, ZIP, Country" required></textarea>
 
         <label>Duck Body Color</label>
         <select name="color" required>
@@ -119,11 +144,8 @@
         <label>Quantity</label>
         <input type="number" name="quantity" value="1" min="1" required>
 
-        <label>Your Email</label>
-        <input type="email" name="email" required placeholder="you@email.com">
-
-        <label>Shipping Address + Notes</label>
-        <textarea name="message" rows="5" placeholder="Full shipping address and any special requests..." required></textarea>
+        <label>Special Requests / Gift Message</label>
+        <textarea name="message" rows="3" placeholder="Any notes..."></textarea>
 
         <button type="submit" class="btn">Submit Order Request</button>
       </form>
@@ -131,7 +153,6 @@
   </div>
 
   <script>
-    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
