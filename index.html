@@ -32,7 +32,7 @@
       line-height: 1.7;
     }
 
-    /* Header - Exact same as About.html */
+    /* Header - Exact match to About.html */
     header {
       position: fixed;
       top: 0;
@@ -83,12 +83,17 @@
       font-weight: 600;
     }
 
-    /* Hero Section */
-    .hero {
+    /* Main Content Area */
+    main {
       padding-top: 140px;
-      padding-bottom: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-bottom: 6rem;
       text-align: center;
     }
+
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3.2rem, 7vw, 5.5rem);
@@ -140,7 +145,7 @@
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      .hero { padding-top: 120px; }
+      main { padding-top: 120px; }
     }
   </style>
 </head>
@@ -165,7 +170,7 @@
     </nav>
   </header>
 
-  <section class="hero">
+  <main>
     <h1>Mims Solutions</h1>
     <p class="subtitle">Precision Additive Manufacturing • Innovative 3D Solutions</p>
     
@@ -181,7 +186,7 @@
 
       <a href="contact.html" class="btn">Get a Quote</a>
     </div>
-  </section>
+  </main>
 
   <script>
     // Mobile Menu
