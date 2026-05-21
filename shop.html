@@ -26,6 +26,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
 
+    /* === FIXED HEADER - Matches index.html === */
     header {
       position: fixed;
       top: 0;
@@ -47,10 +48,34 @@
       font-size: 2.25rem;
       font-weight: 700;
       color: #000;
+      letter-spacing: -1.2px;
     }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+    }
+    /* ========================================== */
 
     .shop-hero {
-      padding: 110px 5% 60px;
+      padding: 110px 5% 80px;
       text-align: center;
     }
 
@@ -115,19 +140,17 @@
   </div>
 
   <div class="shop-grid">
-    <!-- DuckTrooper Card -->
     <div class="product-card" onclick="window.location.href='shop/ducktrooper.html'">
       <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
       <div class="product-info">
         <h3>DuckTrooper Figurine</h3>
-        <p style="color:#666;">Custom color • Fun collectible</p>
-        <div class="price">$5</div>
+        <p style="color:#666;">Custom colors available</p>
+        <div class="price">$8 </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
