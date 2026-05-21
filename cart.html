@@ -25,36 +25,32 @@
       line-height: 1.6;
     }
 
-    /* Fixed Header - Matching your site */
-    header { 
-      position: fixed; top: 0; width: 100%; background: var(--accent); 
-      z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
-    }
-    nav { 
-      max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; 
-      display: flex; justify-content: space-between; align-items: center; 
-    }
-    .logo { 
-      font-family: 'Playfair Display', serif; font-size: 2.25rem; 
-      font-weight: 700; color: #000; letter-spacing: -1.2px; 
-    }
-    .nav-links a { 
-      color: #000; font-weight: 600; text-decoration: none; 
-      text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; 
-      margin-left: 2rem; 
-    }
-    .nav-links a:hover { color: #fff; }
+    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
 
     .cart-container { max-width: 1000px; margin: 2rem auto; padding: 0 5%; }
+
+    #successMessage { 
+      display: none; 
+      background: #d4edda; 
+      color: #155724; 
+      padding: 2.5rem; 
+      border-radius: 16px; 
+      text-align: center; 
+      margin: 2rem 0;
+    }
+
     .cart-item { 
-      background: white; padding: 1.5rem; border-radius: 12px; 
-      margin-bottom: 1rem; display: flex; justify-content: space-between; 
+      background: white; 
+      padding: 1.5rem; 
+      border-radius: 12px; 
+      margin-bottom: 1rem; 
+      display: flex; 
+      justify-content: space-between; 
     }
-    .totals { font-size: 1.1rem; line-height: 1.8; margin: 1.5rem 0; }
-    .grand-total { 
-      font-size: 1.9rem; font-weight: 700; text-align: right; 
-      margin: 2rem 0; color: var(--accent); 
-    }
+
+    .total { font-size: 1.9rem; font-weight: 700; text-align: right; margin: 2rem 0; color: var(--accent); }
 
     label { display: block; margin: 1rem 0 0.3rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
@@ -72,35 +68,46 @@
       cursor: pointer;
       margin-top: 1.5rem;
     }
-
-    #successMessage { 
-      display: none; background: #d4edda; color: #155724; 
-      padding: 3rem; border-radius: 16px; text-align: center; margin-top: 2rem;
-    }
   </style>
 </head>
 <body>
 
-  <header>
-    <nav>
-      <div class="logo">Mims Solutions</div>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">HOME</a>
-        <a href="services.html">SERVICES</a>
-        <a href="shop.html">SHOP</a>
-        <a href="about.html">ABOUT</a>
-        <a href="contact.html">CONTACT</a>
-      </div>
-      <div class="menu-toggle" id="menuToggle">☰</div>
-    </nav>
-  </header>
+ <header>
+  <nav>
+    <div class="logo">Mims Solutions</div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">HOME</a>
+      <a href="services.html">SERVICES</a>
+      <a href="shop.html">SHOP</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+    
+    <!-- Bigger Cart Icon -->
+    <a href="cart.html" style="display:flex; align-items:center; gap:8px; text-decoration:none; color:#000; font-size:1.4rem;">
+      🛒 
+      <span id="cart-count" style="background:#fff; color:#000; border-radius:50%; padding:3px 9px; font-size:1rem; font-weight:700; min-width:22px; text-align:center;">
+        0
+      </span>
+    </a>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </nav>
+</header>
 
   <div class="cart-container">
+    <!-- Success Message at the TOP -->
+    <div id="successMessage">
+      <h2>Thank You! Order Received</h2>
+      <p>We'll review your order and contact you shortly.</p>
+      <a id="paypalLink" href="#" target="_blank" class="btn" style="background:#003087; color:white; display:inline-block; width:auto; padding:1rem 3rem;">
+        Pay with PayPal Now
+      </a>
+    </div>
+
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
-
-    <div class="totals" id="totals"></div>
-    <div class="grand-total" id="grand-total">Grand Total: $0.00</div>
+    <div class="total" id="grand-total">Calculating...</div>
 
     <h2 style="margin-top: 3rem;">Shipping & Order Information</h2>
 
@@ -139,15 +146,6 @@
 
       <button type="submit" class="btn">Submit Order & Pay with PayPal</button>
     </form>
-
-    <!-- Success Message -->
-    <div id="successMessage">
-      <h2>Thank You! Order Received</h2>
-      <p>We'll review your order and contact you shortly.</p>
-      <a id="paypalLink" href="#" target="_blank" class="btn" style="background:#003087; color:white;">
-        Pay with PayPal Now
-      </a>
-    </div>
   </div>
 
   <script>
@@ -184,11 +182,6 @@
       const shipping = 7;
       grandTotal = subtotal + tax + shipping;
 
-      document.getElementById('totals').innerHTML = `
-        Subtotal: $${subtotal.toFixed(2)}<br>
-        Sales Tax (6.25%): $${tax.toFixed(2)}<br>
-        Shipping: $7.00
-      `;
       document.getElementById('grand-total').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
       document.getElementById('cart_summary').value = summary;
       document.getElementById('grand_total_input').value = grandTotal.toFixed(2);
@@ -201,7 +194,6 @@
       loadCart();
     }
 
-    // Form submit
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
       e.preventDefault();
       fetch(this.action, { method: 'POST', body: new FormData(this) })
