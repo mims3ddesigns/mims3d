@@ -25,9 +25,8 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
 
-    /* Header - Exact match to your site */
     header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; letter-spacing: -1.2px; }
@@ -37,7 +36,7 @@
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
     .product-hero { padding: 110px 5% 60px; max-width: 1100px; margin: 0 auto; }
-    .back-btn { color: var(--accent); text-decoration: none; font-weight: 600; margin-bottom: 1rem; display: inline-block; }
+    .back-btn { color: var(--accent); text-decoration: none; font-weight: 600; margin-bottom: 1.5rem; display: inline-block; }
 
     .product-info {
       background: white;
@@ -64,7 +63,11 @@
     }
 
     @media (max-width: 768px) {
-      .nav-links { position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e; flex-direction:column; justify-content:center; align-items:center; transform:translateX(100%); transition:0.4s; z-index:999; }
+      .nav-links {
+        position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e;
+        flex-direction:column; justify-content:center; align-items:center;
+        transform:translateX(100%); transition:0.4s; z-index:999;
+      }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
     }
@@ -96,10 +99,10 @@
 
     <div class="product-info">
       <h2>Order This Item</h2>
-      <p>Fill out the form below. You'll receive confirmation and then can complete payment.</p>
+      <p>Fill out the details below. We’ll email you confirmation shortly.</p>
 
       <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0"> <!-- We'll set this up -->
+        <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
         <input type="hidden" name="subject" value="New DuckTrooper Order Request">
         <input type="hidden" name="from_name" value="Mims Solutions Shop">
 
@@ -116,11 +119,11 @@
         <label>Quantity</label>
         <input type="number" name="quantity" value="1" min="1" required>
 
-        <label>Your Email (for order confirmation)</label>
-        <input type="email" name="email" required placeholder="your@email.com">
+        <label>Your Email</label>
+        <input type="email" name="email" required placeholder="you@email.com">
 
         <label>Shipping Address + Notes</label>
-        <textarea name="message" rows="5" placeholder="Full shipping address + any special requests..." required></textarea>
+        <textarea name="message" rows="5" placeholder="Full shipping address and any special requests..." required></textarea>
 
         <button type="submit" class="btn">Submit Order Request</button>
       </form>
