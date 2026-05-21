@@ -191,23 +191,24 @@
     </div>
   </section>
 
-  <script>
-    // Update cart count
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const countEl = document.getElementById('cart-count');
-      if (countEl) countEl.textContent = cart.length;
-    }
+<script>
+  // Mobile Menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
 
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-    });
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+    menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+  });
 
-    window.onload = updateCartCount;
-  </script>
+  // Update cart count
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const countEl = document.getElementById('cart-count');
+    if (countEl) countEl.textContent = cart.length;
+  }
+
+  window.onload = updateCartCount;
+</script>
 </body>
 </html>
