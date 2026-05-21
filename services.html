@@ -1,63 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'AW-18035820566');
 </script>
-<meta name="description" content="Mims Solutions: Custom 3D printing, rapid prototyping, and design consulting in additive manufacturing. Based in Austin, TX – serving clients nationwide.">
-<meta name="keywords" content="3D printing Austin, additive manufacturing Texas, custom prototypes, rapid prototyping, DfAM consulting, 3D design services">
-<meta property="og:title" content="Mims Solutions | Precision Additive Manufacturing">
-<meta property="og:description" content="Turning ideas into reality with high-quality 3D printing and engineering expertise.">
-<meta property="og:image" content="https://mims3d.com/path-to-your-hero-image.jpg"> <!-- if you have one -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mims Solutions: Custom 3D printing, rapid prototyping, and design consulting in additive manufacturing.">
   <title>Services • Mims Solutions</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <style>
-   :root {
-  --bg-light: #F8F9F6;        /* Main background */
-  --text-dark: #1F2521;       /* Main text */
-  --text-medium: #47555E;     /* Secondary text */
-  --accent: #0D9488;          /* Teal accent */
-  --accent-dark: #0B7A70;
-  --card-bg: #FFFFFF;
-  --border: #E2E8E0;
-}
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg-light: #F8F9F6;
+      --text-dark: #1F2521;
+      --accent: #0D9488;
     }
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      color: var(--text);
-      background: var(--bg-dark);
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: var(--bg-light); 
+      color: var(--text-dark); 
       line-height: 1.7;
-      min-height: 100vh;
     }
 
-    /* Header (same as index) */
+    /* Consistent Header with Cart */
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      z-index: 1000;
       background: var(--accent);
+      z-index: 1000;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
-
     nav {
       max-width: 1400px;
       margin: 0 auto;
@@ -66,114 +49,91 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
+      font-size: 2.25rem;
       font-weight: 700;
       color: #000;
-      letter-spacing: -1px;
+      letter-spacing: -1.2px;
     }
-
     .nav-links {
       display: flex;
       gap: 2.5rem;
     }
-
     .nav-links a {
       color: #000;
       font-weight: 600;
       text-decoration: none;
-      transition: color 0.25s;
       text-transform: uppercase;
       font-size: 0.95rem;
       letter-spacing: 1px;
     }
-
     .nav-links a:hover,
     .nav-links a.active {
       color: #fff;
     }
 
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
+    /* Cart Icon */
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
       color: #000;
+      font-size: 1.5rem;
+      font-weight: 600;
     }
 
-    /* Main content */
     main {
-      padding-top: 140px; /* space for fixed header */
+      padding-top: 140px;
       max-width: 1400px;
       margin: 0 auto;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-bottom: 6rem;
+      padding: 0 5% 6rem;
     }
-
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3.5rem, 8vw, 6rem);
       text-align: center;
       margin-bottom: 1rem;
-      color: var(--text);
     }
-
     .subtitle {
       text-align: center;
       font-size: 1.4rem;
-      color: var(--text-light);
+      color: #47555E;
       margin-bottom: 4rem;
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
     }
-
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
       gap: 2.5rem;
     }
-
     .service-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(94,234,212,0.2);
-      border-radius: var(--radius);
+      background: white;
+      border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
     }
-
     .service-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      transform: translateY(-10px);
     }
-
     .service-img {
       width: 100%;
       height: 240px;
       object-fit: cover;
-      border-bottom: 4px solid var(--accent);
     }
-
     .card-content {
       padding: 2rem;
     }
-
     .card-content h2 {
       font-family: 'Playfair Display', serif;
       font-size: 2.1rem;
       margin-bottom: 1rem;
       color: var(--accent);
     }
-
-    .card-content p {
-      color: var(--text-light);
-      margin-bottom: 1.8rem;
-      font-size: 1.1rem;
-    }
-
     .btn {
       display: inline-block;
       padding: 1rem 2rem;
@@ -182,15 +142,7 @@
       font-weight: 700;
       border-radius: 50px;
       text-decoration: none;
-      transition: all 0.3s;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.95rem;
-    }
-
-    .btn:hover {
-      background: var(--accent-dark);
-      transform: translateY(-3px);
+      margin-top: 1rem;
     }
 
     @media (max-width: 768px) {
@@ -198,7 +150,7 @@
         position: fixed;
         top: 0; right: 0; bottom: 0;
         width: 70%;
-        background: #388062;
+        background: #1a3c2e;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -206,18 +158,9 @@
         transition: transform 0.4s ease;
         z-index: 999;
       }
-
-      .nav-links.show {
-        transform: translateX(0);
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-
-      main {
-        padding-top: 120px;
-      }
+      .nav-links.show { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      main { padding-top: 120px; }
     }
   </style>
 </head>
@@ -226,13 +169,18 @@
   <header>
     <nav>
       <div class="logo">Mims Solutions</div>
-      
       <div class="nav-links" id="navLinks">
         <a href="index.html">HOME</a>
         <a href="services.html" class="active">SERVICES</a>
+        <a href="shop.html">SHOP</a>
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
       </div>
+      
+      <!-- Cart Icon -->
+      <a href="cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
 
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
@@ -241,64 +189,66 @@
   <main>
     <h1>Our Services</h1>
     <p class="subtitle">Precision additive manufacturing solutions tailored for innovation, speed, and performance — right here in Austin, Texas.</p>
-
+    
     <div class="services-grid">
-
-      <!-- Service 1: 3D Printing -->
+      <!-- Service 1 -->
       <div class="service-card">
-        <img src="https://cdn.thefabricator.com/a/metal-3d-printer-eliminates-the-debinding-process-1594824704.jpg" alt="Advanced 3D printing in action" class="service-img">
+        <img src="https://cdn.thefabricator.com/a/metal-3d-printer-eliminates-the-debinding-process-1594824704.jpg" alt="Advanced 3D printing" class="service-img">
         <div class="card-content">
           <h2>3D Printing</h2>
-          <p>State-of-the-art 3D printing services using FDM technology. From functional prototypes to end-use production parts, we deliver high-resolution, durable components with tight tolerances and a wide range of materials including PLA, ABS, ASA, Nylon and Carbon Fiber reinforced materials</p>
+          <p>State-of-the-art 3D printing services using FDM technology. From functional prototypes to end-use production parts.</p>
           <a href="contact.html" class="btn">Request Service</a>
         </div>
       </div>
 
-      <!-- Service 2: Rapid Prototyping -->
+      <!-- Service 2 -->
       <div class="service-card">
-        <img src="https://lodestar3d.com/wp-content/uploads/2024/01/DALL%C2%B7E-2024-05-27-19.39.21-A-high-resolution-image-of-a-3D-printer-in-action-with-the-print-head-visible-as-it-layers-a-detailed-prototype.-The-background-displays-various-comp-1024x646.webp" alt="Rapid prototyping with 3D printer" class="service-img">
+        <img src="https://lodestar3d.com/wp-content/uploads/2024/01/DALL%C2%B7E-2024-05-27-19.39.21-A-high-resolution-image-of-a-3D-printer-in-action-with-the-print-head-visible-as-it-layers-a-detailed-prototype.-The-background-displays-various-comp-1024x646.webp" alt="Rapid prototyping" class="service-img">
         <div class="card-content">
-          <h2>Rapid Prototyping (Additive Manufacturing)</h2>
-          <p>Accelerate your product development cycle with fast-turnaround prototypes. Iterate designs quickly, test form/fit/function, and validate concepts before committing to traditional tooling. Ideal for startups, engineers, and manufacturers needing speed without sacrificing quality.</p>
+          <h2>Rapid Prototyping</h2>
+          <p>Accelerate your product development with fast-turnaround prototypes and iteration.</p>
           <a href="contact.html" class="btn">Get a Prototype Quote</a>
         </div>
       </div>
 
-      <!-- Service 3: Design Consulting -->
+      <!-- Service 3 -->
       <div class="service-card">
-        <img src="https://i.all3dp.com/workers/images/fit=scale-down,w=1200,h=671,quality=79,gravity=0.5x0.5,format=auto/wp-content/uploads/2020/12/02161635/AdobeStock_292340919-plus-Fusion-360-DfAM-hero_-1-scaled.jpg" alt="DfAM design consulting on CAD software" class="service-img">
+        <img src="https://i.all3dp.com/workers/images/fit=scale-down,w=1200,h=671,quality=79,gravity=0.5x0.5,format=auto/wp-content/uploads/2020/12/02161635/AdobeStock_292340919-plus-Fusion-360-DfAM-hero_-1-scaled.jpg" alt="Design consulting" class="service-img">
         <div class="card-content">
           <h2>Design Consulting – DfM & DfAM</h2>
-          <p>Expert guidance in Design for Manufacturing (DfM) and Design for Additive Manufacturing (DfAM). Optimize your parts for printability, reduce material use, minimize supports, improve strength, and lower costs. We help transition traditional designs to leverage the full potential of additive technologies — including topology optimization, lattice structures, and conformal cooling.</p>
+          <p>Expert guidance to optimize your designs for additive manufacturing.</p>
           <a href="contact.html" class="btn">Schedule Consultation</a>
         </div>
       </div>
-
     </div>
   </main>
 
   <script>
-    // Mobile menu toggle (same as index.html)
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
-
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-        menuToggle.textContent = '☰';
-      });
-    });
+    window.onload = updateCartCount;
   </script>
-<footer style="background: var(--bg-darker); padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: var(--text-light); border-top: 1px solid rgba(94,234,212,0.1);">
-  <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
-  <p><a href="tel:+17204681128" style="color: var(--accent);"> (720) 468-1128 </a> | <a href="mailto:mims25solutions@gmail.com" style="color: var(--accent);">mims25solutions@gmail.com</a></p>
-  <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
-  <p><a href="https://https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: var(--accent);">Shop on Etsy</a> | <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: var(--accent);">Instagram</a></p>
-</footer>
+
+  <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8;">
+    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
+    <p>
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
+    </p>
+    <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
+  </footer>
 </body>
 </html>
