@@ -165,7 +165,7 @@
       loadCart();
     }
 
-    // Form submission - Email + PayPal + Thank You Page
+    // Submit form → Email + PayPal + Thank You Page
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -174,7 +174,7 @@
           // Open PayPal in new tab
           window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
           
-          // Redirect current tab to thank you page
+          // Go to thank you page
           window.location.href = '../thanks-shop.html';
         })
         .catch(() => alert("Error submitting order. Please try again."));
