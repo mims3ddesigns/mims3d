@@ -17,82 +17,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <style>
-    :root {
-      --bg-light: #F8F9F6;
-      --text-dark: #1F2521;
-      --accent: #0D9488;
-    }
+    :root { --accent: #0D9488; }
+    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: var(--bg-light); 
-      color: var(--text-dark); 
-      line-height: 1.7;
-    }
+    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    /* Header - Matching About.html */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--accent);
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #000;
-      letter-spacing: -1.2px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
-    .nav-links a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
+    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
-
-    .shop-hero {
-      padding: 110px 5% 80px;
-      text-align: center;
-    }
+    .shop-hero { padding: 110px 5% 80px; text-align: center; }
     .shop-grid {
       max-width: 1400px;
       margin: 0 auto;
@@ -109,48 +47,20 @@
       cursor: pointer;
       transition: 0.3s;
     }
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-    }
-    .product-card img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-    }
-    .product-info {
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .price {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
+    .product-card:hover { transform: translateY(-8px); }
+    .product-card img { width: 100%; height: 260px; object-fit: cover; }
+    .product-info { padding: 1.5rem; text-align: center; }
+    .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
 
-    /* ==================== MOBILE MENU ==================== */
     @media (max-width: 768px) {
       .nav-links {
-        position: fixed;
-        top: 0; right: 0; bottom: 0;
-        width: 70%;
-        background: #1a3c2e;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.4s ease;
-        z-index: 999;
+        position: fixed; top: 0; right: 0; bottom: 0; width: 70%;
+        background: #1a3c2e; flex-direction: column; justify-content: center; align-items: center;
+        transform: translateX(100%); transition: transform 0.4s ease; z-index: 999;
       }
-      .nav-links.show {
-        transform: translateX(0);
-      }
-      .menu-toggle {
-        display: block;
-      }
-      .shop-hero {
-        padding-top: 100px;
-      }
+      .nav-links.show { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      .shop-hero { padding-top: 100px; }
     }
   </style>
 </head>
@@ -166,12 +76,7 @@
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
       </div>
-      
-      <!-- Cart Icon -->
-      <a href="cart.html" class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </a>
-
+      <a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
@@ -193,7 +98,6 @@
   </div>
 
   <script>
-    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
@@ -201,13 +105,11 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    // Cart count
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
-
     window.onload = updateCartCount;
   </script>
 </body>
