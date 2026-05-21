@@ -211,13 +211,19 @@
   </main>
 
   <script>
-    // Update cart count
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    });
+
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
-
     window.onload = updateCartCount;
   </script>
 </body>
