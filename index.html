@@ -29,10 +29,10 @@
       font-family: 'Inter', sans-serif; 
       background: var(--bg-light); 
       color: var(--text-dark); 
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    /* Header - Same as About.html */
+    /* Header - Exact same as About.html */
     header {
       position: fixed;
       top: 0;
@@ -73,7 +73,6 @@
       color: #fff;
     }
 
-    /* Cart Icon */
     .cart-icon {
       display: flex;
       align-items: center;
@@ -84,28 +83,27 @@
       font-weight: 600;
     }
 
-    /* Hero */
+    /* Hero Section */
     .hero {
-      padding: 110px 5% 60px;
+      padding-top: 140px;
+      padding-bottom: 80px;
       text-align: center;
     }
-    .hero h1 {
+    h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3.2rem, 7vw, 5.5rem);
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      letter-spacing: -1.5px;
+      margin-bottom: 1rem;
     }
     .subtitle {
       font-size: 1.35rem;
       color: #47555E;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
     }
     .content-box {
       background: white;
       border: 1px solid #E2E8E0;
       border-radius: 16px;
-      padding: 2.5rem 2rem;
+      padding: 3rem 2rem;
       max-width: 820px;
       margin: 0 auto;
       box-shadow: 0 10px 30px rgba(0,0,0,0.07);
@@ -113,20 +111,36 @@
     .printer-img {
       max-width: 420px;
       width: 100%;
-      height: auto;
       border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-      margin: 1.8rem auto;
+      margin: 2rem auto;
       display: block;
     }
     .btn {
       display: inline-block;
-      padding: 1.1rem 2.5rem;
+      padding: 1.1rem 2.8rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border-radius: 50px;
       text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: 70%;
+        background: #1a3c2e;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+      }
+      .nav-links.show { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      .hero { padding-top: 120px; }
     }
   </style>
 </head>
@@ -143,7 +157,6 @@
         <a href="contact.html">CONTACT</a>
       </div>
       
-      <!-- Cart Icon -->
       <a href="cart.html" class="cart-icon">
         🛒 <span id="cart-count">0</span>
       </a>
@@ -153,22 +166,20 @@
   </header>
 
   <section class="hero">
-    <div class="hero-content">
-      <h1>Mims Solutions</h1>
-      <p class="subtitle">Precision Additive Manufacturing • Innovative 3D Solutions</p>
-      
-      <div class="content-box">
-        <h2>Innovative Solutions for Your Vision</h2>
-        <p style="margin-bottom: 2rem;">
-          We specialize in cutting-edge 3D printing and additive manufacturing technologies, delivering high-precision prototypes, production parts, and custom designs.
-        </p>
+    <h1>Mims Solutions</h1>
+    <p class="subtitle">Precision Additive Manufacturing • Innovative 3D Solutions</p>
+    
+    <div class="content-box">
+      <h2>Innovative Solutions for Your Vision</h2>
+      <p style="margin-bottom: 2rem;">
+        We specialize in cutting-edge 3D printing and additive manufacturing technologies, delivering high-precision prototypes, production parts, and custom designs.
+      </p>
 
-        <img src="/images/123fbb7f-ab32-49c8-afd7-ab04c03a4ce4.jpg" 
-             alt="Industrial additive manufacturing setup at Mims Solutions" 
-             class="printer-img">
+      <img src="/images/123fbb7f-ab32-49c8-afd7-ab04c03a4ce4.jpg" 
+           alt="Industrial additive manufacturing setup at Mims Solutions" 
+           class="printer-img">
 
-        <a href="contact.html" class="btn">Get a Quote</a>
-      </div>
+      <a href="contact.html" class="btn">Get a Quote</a>
     </div>
   </section>
 
@@ -181,13 +192,11 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    // Cart count
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
-
     window.onload = updateCartCount;
   </script>
 </body>
