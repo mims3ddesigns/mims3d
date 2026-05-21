@@ -76,7 +76,7 @@
     <div class="price-breakdown" id="price-breakdown"></div>
     <div class="grand-total" id="grand-total">Grand Total: $0.00</div>
 
-    <form id="checkoutForm" action="https://api.web3forms.com/submit" method="POST">
+    <form id="checkoutForm">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New Order from Cart">
       <input type="hidden" name="cart_summary" id="cart_summary">
@@ -132,7 +132,6 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * (item.quantity || 1);
         subtotal += itemTotal;
-
         summary += `${item.quantity || 1}x ${item.name} (${item.color || 'N/A'}) - $${itemTotal.toFixed(2)}\n`;
 
         container.innerHTML += `
@@ -155,8 +154,6 @@
         <div>Shipping: $7.00</div>
       `;
       document.getElementById('grand-total').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
-
-      // Improved summary for email
       document.getElementById('cart_summary').value = summary + `\n---\nSubtotal: $${subtotal.toFixed(2)}\nTax: $${tax.toFixed(2)}\nShipping: $7.00\nGRAND TOTAL: $${grandTotal.toFixed(2)}`;
       document.getElementById('grand_total_input').value = grandTotal.toFixed(2);
     }
@@ -168,14 +165,22 @@
       loadCart();
     }
 
+    // Form submission - Email + PayPal + Thank You Page
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
       e.preventDefault();
+
       fetch(this.action, { method: 'POST', body: new FormData(this) })
         .then(() => {
+          // Open PayPal in new tab
           window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
-        });
+          
+          // Redirect current tab to thank you page
+          window.location.href = '../thanks-shop.html';
+        })
+        .catch(() => alert("Error submitting order. Please try again."));
     });
 
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
@@ -185,17 +190,19 @@
 
     window.onload = loadCart;
   </script>
+
+  <!-- Consistent Footer -->
   <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
-  <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
-  <p>
-    <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
-    <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
-  </p>
-  <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
-  <p>
-    <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
-    <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
-  </p>
-</footer>
+    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
+    <p>
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
+    </p>
+    <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
+    <p>
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
+      <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
+    </p>
+  </footer>
 </body>
 </html>
