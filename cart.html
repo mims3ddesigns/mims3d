@@ -32,7 +32,8 @@
       display: flex;
       justify-content: space-between;
     }
-    .total { font-size: 1.8rem; font-weight: 700; text-align: right; margin: 2rem 0; color: var(--accent); }
+    .totals { font-size: 1.1rem; margin: 1.5rem 0; }
+    .total { font-size: 1.9rem; font-weight: 700; text-align: right; color: var(--accent); margin: 1rem 0; }
 
     label { display: block; margin: 1rem 0 0.3rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
@@ -71,15 +72,19 @@
   <div class="cart-container">
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
-    <div class="total" id="cart-total">Total: $0.00 + $7 Shipping</div>
+
+    <div class="totals" id="totals"></div>
+    <div class="total" id="grand-total">Total: $0.00</div>
 
     <h2 style="margin-top: 3rem;">Shipping & Order Information</h2>
 
     <form id="checkoutForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New Order from Cart">
-      <input type="hidden" name="cart_items" id="cart_items">
+      <input type="hidden" name="cart_summary" id="cart_summary">
+      <input type="hidden" name="grand_total" id="grand_total_input">
 
+      <!-- Your form fields here (same as before) -->
       <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
@@ -95,26 +100,17 @@
       <label class="required">Street Address</label>
       <input type="text" name="street" required>
 
-      <label>Apartment, Suite, Unit, etc. (optional)</label>
+      <label>Apartment, Suite, Unit (optional)</label>
       <input type="text" name="apt">
 
       <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
-        <div>
-          <label class="required">City</label>
-          <input type="text" name="city" required>
-        </div>
-        <div>
-          <label class="required">State</label>
-          <input type="text" name="state" required>
-        </div>
-        <div>
-          <label class="required">ZIP Code</label>
-          <input type="text" name="zip" required>
-        </div>
+        <div><label class="required">City</label><input type="text" name="city" required></div>
+        <div><label class="required">State</label><input type="text" name="state" required></div>
+        <div><label class="required">ZIP Code</label><input type="text" name="zip" required></div>
       </div>
 
-      <label>Order Notes / Special Requests</label>
-      <textarea name="notes" rows="4" placeholder="Gift message, delivery instructions, etc."></textarea>
+      <label>Order Notes</label>
+      <textarea name="notes" rows="4" placeholder="Gift message, delivery instructions..."></textarea>
 
       <button type="submit" class="btn">Submit Order & Pay with PayPal</button>
     </form>
@@ -124,37 +120,42 @@
     function loadCart() {
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       const container = document.getElementById('cart-items');
-      let total = 0;
-      let cartSummary = "";
+      let subtotal = 0;
+      let summary = "";
 
       container.innerHTML = '';
 
       if (cart.length === 0) {
-        container.innerHTML = '<p>Your cart is empty. <a href="shop.html">Go shopping</a></p>';
+        container.innerHTML = '<p>Your cart is empty.</p>';
         return;
       }
 
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-
-        cartSummary += `${item.quantity}x ${item.name} (${item.color}) - $${itemTotal}\n`;
+        subtotal += itemTotal;
+        summary += `${item.quantity}x ${item.name} (${item.color}) - $${itemTotal}\n`;
 
         container.innerHTML += `
           <div class="cart-item">
-            <div>
-              <strong>${item.name}</strong><br>
-              Color: ${item.color} × ${item.quantity}
-            </div>
-            <div style="text-align:right;">
-              $${itemTotal}<br>
+            <div><strong>${item.name}</strong><br>Color: ${item.color} × ${item.quantity}</div>
+            <div style="text-align:right;">$${itemTotal}<br>
               <small onclick="removeFromCart(${index})" style="color:red; cursor:pointer;">Remove</small>
             </div>
           </div>`;
       });
 
-      document.getElementById('cart-total').textContent = `Total: $${total} + $7 Shipping`;
-      document.getElementById('cart_items').value = cartSummary;
+      const tax = subtotal * 0.0625;
+      const shipping = 7;
+      const grandTotal = subtotal + tax + shipping;
+
+      document.getElementById('totals').innerHTML = `
+        Subtotal: $${subtotal.toFixed(2)}<br>
+        Tax (6.25%): $${tax.toFixed(2)}<br>
+        Shipping: $7.00
+      `;
+      document.getElementById('grand-total').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
+      document.getElementById('cart_summary').value = summary;
+      document.getElementById('grand_total_input').value = grandTotal.toFixed(2);
     }
 
     function removeFromCart(index) {
