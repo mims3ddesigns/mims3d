@@ -11,7 +11,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cart • Mims Solutions</title>
+  <title>Your Cart • Mims Solutions</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
@@ -19,16 +19,18 @@
     :root {
       --accent: #0D9488;
     }
-    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; padding-top: 80px; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      padding-top: 90px; 
+      line-height: 1.6;
+    }
     header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
 
-    .cart-container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 5%;
-    }
+    .cart-container { max-width: 1000px; margin: 2rem auto; padding: 0 5%; }
     .cart-item {
       background: white;
       padding: 1.5rem;
@@ -36,24 +38,23 @@
       margin-bottom: 1rem;
       display: flex;
       justify-content: space-between;
-      align-items: center;
     }
-    .total {
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-align: right;
-      margin: 2rem 0;
-      color: var(--accent);
-    }
+    .total { font-size: 1.8rem; font-weight: 700; text-align: right; margin: 2rem 0; color: var(--accent); }
+
+    label { display: block; margin: 1rem 0 0.5rem; font-weight: 600; }
+    input, textarea, select { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+
     .btn {
-      padding: 1.1rem 2.5rem;
+      width: 100%;
+      padding: 1.2rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border: none;
       border-radius: 50px;
-      cursor: pointer;
       font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
     }
   </style>
 </head>
@@ -77,12 +78,52 @@
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
     
-    <div class="total" id="cart-total">$0.00</div>
+    <div class="total" id="cart-total">Total: $0.00 + $7 Shipping</div>
 
-    <button onclick="checkout()" class="btn" style="width:100%;">Proceed to PayPal Checkout</button>
-    <p style="text-align:center; margin-top:1rem;">
-      <a href="shop.html">← Continue Shopping</a>
-    </p>
+    <h2 style="margin-top: 3rem;">Shipping & Order Information</h2>
+
+    <form id="checkoutForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
+      <input type="hidden" name="subject" value="New Order from Cart">
+
+      <label>Full Name</label>
+      <input type="text" name="name" required>
+
+      <label>Company Name (optional)</label>
+      <input type="text" name="company">
+
+      <label>Email Address</label>
+      <input type="email" name="email" required>
+
+      <label>Phone Number</label>
+      <input type="tel" name="phone" required>
+
+      <label>Street Address</label>
+      <input type="text" name="street" required>
+
+      <label>Apartment, Suite, Unit, etc. (optional)</label>
+      <input type="text" name="apt">
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
+        <div>
+          <label>City</label>
+          <input type="text" name="city" required>
+        </div>
+        <div>
+          <label>State</label>
+          <input type="text" name="state" required>
+        </div>
+        <div>
+          <label>ZIP Code</label>
+          <input type="text" name="zip" required>
+        </div>
+      </div>
+
+      <label>Order Notes / Special Requests</label>
+      <textarea name="notes" rows="4" placeholder="Gift message, delivery instructions, etc."></textarea>
+
+      <button type="submit" class="btn">Submit Order & Pay with PayPal</button>
+    </form>
   </div>
 
   <script>
@@ -94,7 +135,7 @@
       container.innerHTML = '';
 
       if (cart.length === 0) {
-        container.innerHTML = '<p>Your cart is empty.</p>';
+        container.innerHTML = '<p>Your cart is empty. <a href="shop.html">Go shopping</a></p>';
         return;
       }
 
@@ -123,13 +164,6 @@
       cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(cart));
       loadCart();
-    }
-
-    function checkout() {
-      const total = document.getElementById('cart-total').textContent;
-      if (confirm(`Proceed to PayPal for ${total}?`)) {
-        window.location.href = "https://paypal.me/MimsSolutions/15";  // $8 + $7
-      }
     }
 
     // Mobile Menu
