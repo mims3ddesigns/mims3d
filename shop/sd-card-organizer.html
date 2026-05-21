@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18035820566');
+</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SD & microSD Card Organizer • Mims Solutions</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root { --accent: #0D9488; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      line-height: 1.7;
+    }
+
+    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
+    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
+
+    main { padding-top: 260px; max-width: 900px; margin: 0 auto; padding: 0 5%; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; margin-bottom: 0.5rem; }
+    .price { font-size: 2rem; color: var(--accent); text-align: center; margin-bottom: 2rem; }
+
+    img { max-width: 420px; width: 100%; border-radius: 12px; display: block; margin: 2rem auto; }
+
+    form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; margin-top: 2rem; }
+    label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
+    .required::after { content: " *"; color: red; }
+    input, select, textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+
+    .btn {
+      width: 100%;
+      padding: 1.3rem;
+      background: #1a3c2e;
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e; flex-direction:column; justify-content:center; align-items:center; transform:translateX(100%); transition:transform 0.4s ease; z-index:999; }
+      .nav-links.show { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      main { padding-top: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">Mims Solutions</div>
+      <div class="nav-links" id="navLinks">
+        <a href="../index.html">HOME</a>
+        <a href="../services.html">SERVICES</a>
+        <a href="../shop.html">SHOP</a>
+        <a href="../about.html">ABOUT</a>
+        <a href="../contact.html">CONTACT</a>
+      </div>
+      <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+      <div class="menu-toggle" id="menuToggle">☰</div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>SD & microSD Card Organizer</h1>
+    <p class="price">$12.00 each</p>
+
+    <img src="images/sd-card-organizer.jpg" alt="SD & microSD Card Organizer">
+
+    <form id="addToCartForm">
+      <label class="required">Color</label>
+      <select name="color" required>
+        <option value="">Choose Color</option>
+        <option value="Blue">Blue</option>
+        <option value="Black">Black</option>
+        <option value="Red">Red</option>
+        <option value="Green">Green</option>
+      </select>
+
+      <label class="required">Quantity</label>
+      <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+
+      <button type="submit" class="btn">Add to Cart</button>
+    </form>
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    });
+
+    document.getElementById('addToCartForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const color = this.color.value;
+      const qty = parseInt(this.quantity.value) || 1;
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({
+        id: Date.now(),
+        name: "SD & microSD Card Organizer",
+        price: 12,
+        color: color,
+        quantity: qty
+      });
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      alert(`✅ Added ${qty}x SD Card Organizer (${color}) to cart!`);
+      window.location.href = '../cart.html';
+    });
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
+    window.onload = updateCartCount;
+  </script>
+
+  <!-- Footer -->
+  <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
+    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
+    <p>
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
+    </p>
+    <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
+    <p>
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
+      <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
+    </p>
+  </footer>
+</body>
+</html>
