@@ -32,7 +32,7 @@
       line-height: 1.7;
     }
 
-    /* Consistent Header with Cart */
+    /* Consistent Header - Matching About page */
     header {
       position: fixed;
       top: 0;
@@ -85,7 +85,7 @@
     }
 
     main {
-      padding-top: 160px;     /* Increased padding so content isn't cut off */
+      padding-top: 160px;   /* Fixed spacing so content isn't cut off */
       max-width: 900px;
       margin: 0 auto;
       padding-left: 5%;
@@ -129,8 +129,9 @@
       width: 100%;
     }
 
-    @media (max-width: 768px) {
-      main { padding-top: 130px; }
+    .direct-info {
+      margin: 4rem 0 2rem;
+      font-size: 1.2rem;
     }
   </style>
 </head>
@@ -151,8 +152,6 @@
       <a href="cart.html" class="cart-icon">
         🛒 <span id="cart-count">0</span>
       </a>
-
-      <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
 
@@ -179,10 +178,11 @@
       <button type="submit">Send Message</button>
     </form>
 
-    <div class="direct-info" style="margin-top: 4rem;">
+    <div class="direct-info">
       <p>Or reach us directly:</p>
       <p><strong>Phone:</strong> <a href="tel:+17204681128">(720) 468-1128</a></p>
       <p><strong>Email:</strong> <a href="mailto:mims25solutions@gmail.com">mims25solutions@gmail.com</a></p>
+      <p>Now based in Austin, Texas — serving clients nationwide.</p>
     </div>
   </main>
 
@@ -193,14 +193,6 @@
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
-
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-    });
 
     window.onload = updateCartCount;
   </script>
