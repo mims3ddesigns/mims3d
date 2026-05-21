@@ -47,6 +47,7 @@
       font-weight: 700;
       color: #000;
     }
+
     .nav-links a {
       color: #000;
       font-weight: 600;
@@ -57,11 +58,7 @@
     }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    .cart-icon {
-      font-size: 1.6rem;
-      text-decoration: none;
-      color: #000;
-    }
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
 
     .menu-toggle {
       display: none;
@@ -71,17 +68,40 @@
     }
 
     main {
-      padding-top: 180px;
+      padding-top: 200px;   /* Increased for better clearance */
       max-width: 900px;
       margin: 0 auto;
-      padding: 0 5%;
+      padding-left: 5%;
+      padding-right: 5%;
     }
 
-    h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; }
-    .price { font-size: 2rem; color: var(--accent); text-align: center; margin: 1rem 0; }
-    img { max-width: 380px; width: 100%; border-radius: 12px; display: block; margin: 2rem auto; }
+    h1 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 3.2rem; 
+      text-align: center; 
+    }
+    .price { 
+      font-size: 2rem; 
+      color: var(--accent); 
+      text-align: center; 
+      margin: 1rem 0; 
+    }
 
-    form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; }
+    img { 
+      max-width: 380px; 
+      width: 100%; 
+      border-radius: 12px; 
+      display: block; 
+      margin: 2rem auto; 
+    }
+
+    form { 
+      background: white; 
+      padding: 2.5rem; 
+      border-radius: 16px; 
+      border: 1px solid #E2E8E0; 
+    }
+
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
     input, select { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
@@ -96,6 +116,25 @@
       border-radius: 50px;
       margin-top: 1.5rem;
       cursor: pointer;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: 70%;
+        background: #1a3c2e;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+      }
+      .nav-links.show { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      main { padding-top: 130px; }
     }
   </style>
 </head>
@@ -160,7 +199,6 @@
       const qty = parseInt(this.quantity.value) || 1;
 
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      
       cart.push({
         id: Date.now(),
         name: "DuckTrooper",
