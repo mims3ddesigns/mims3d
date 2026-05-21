@@ -26,7 +26,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
 
-    /* Fixed Header with Cart */
+    /* Consistent Header */
     header {
       position: fixed;
       top: 0;
@@ -122,26 +122,23 @@
 </head>
 <body>
 
-<header>
-  <nav>
-    <div class="logo">Mims Solutions</div>
-    
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">HOME</a>
-      <a href="services.html">SERVICES</a>
-      <a href="shop.html">SHOP</a>
-      <a href="about.html">ABOUT</a>
-      <a href="contact.html">CONTACT</a>
-    </div>
-
-    <!-- Cart Icon -->
-    <a href="cart.html" style="display:flex; align-items:center; gap:8px; text-decoration:none; color:#000; font-size:1.5rem;">
-      🛒 <span id="cart-count">0</span>
-    </a>
-
-    <div class="menu-toggle" id="menuToggle">☰</div>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <div class="logo">Mims Solutions</div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">HOME</a>
+        <a href="services.html">SERVICES</a>
+        <a href="shop.html" class="active">SHOP</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+      </div>
+      
+      <!-- Cart Icon -->
+      <a href="cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
+    </nav>
+  </header>
 
   <div class="shop-hero">
     <h1 style="font-family: 'Playfair Display', serif; font-size: 3.5rem;">Our Shop</h1>
@@ -159,24 +156,15 @@
     </div>
   </div>
 
- <script>
-  // Mobile Menu
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
+  <script>
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
 
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-    menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-  });
-
-  // Update cart count
-  function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const countEl = document.getElementById('cart-count');
-    if (countEl) countEl.textContent = cart.length;
-  }
-
-  window.onload = updateCartCount;
-</script>
+    window.onload = updateCartCount;
+  </script>
 </body>
 </html>
