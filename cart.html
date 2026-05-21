@@ -16,68 +16,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <style>
-    :root {
-      --bg-light: #F8F9F6;
-      --text-dark: #1F2521;
-      --accent: #0D9488;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --accent: #0D9488; }
     body { 
       font-family: 'Inter', sans-serif; 
-      background: var(--bg-light); 
-      color: var(--text-dark); 
+      background: #F8F9F6; 
+      color: #1F2521; 
       padding-top: 90px; 
       line-height: 1.6;
     }
 
-    /* === FIXED HEADER - Matches all other pages === */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--accent);
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    header { 
+      position: fixed; top: 0; width: 100%; background: var(--accent); 
+      z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
     }
-    nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    nav { 
+      max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; 
+      display: flex; justify-content: space-between; align-items: center; 
     }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #000;
-      letter-spacing: -1.2px;
+    .logo { 
+      font-family: 'Playfair Display', serif; font-size: 2.25rem; 
+      font-weight: 700; color: #000; letter-spacing: -1.2px; 
     }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
+    .nav-links a { 
+      color: #000; font-weight: 600; text-decoration: none; 
+      text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; 
+      margin-left: 2rem; 
     }
-    .nav-links a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
-    /* ============================================== */
+    .nav-links a:hover { color: #fff; }
 
     .cart-container { max-width: 1000px; margin: 2rem auto; padding: 0 5%; }
     .cart-item { background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; }
@@ -98,6 +63,16 @@
       font-size: 1.1rem;
       cursor: pointer;
       margin-top: 1.5rem;
+    }
+
+    #successMessage { 
+      display: none; 
+      background: #d4edda; 
+      color: #155724; 
+      padding: 3rem; 
+      border-radius: 16px; 
+      text-align: center; 
+      margin-top: 2rem;
     }
   </style>
 </head>
@@ -159,6 +134,14 @@
 
       <button type="submit" class="btn">Submit Order & Pay with PayPal</button>
     </form>
+
+    <div id="successMessage">
+      <h2>Thank You! Order Received</h2>
+      <p>We'll review your order and contact you shortly.</p>
+      <a id="paypalLink" href="#" target="_blank" class="btn" style="background:#003087; color:white;">
+        Pay with PayPal Now
+      </a>
+    </div>
   </div>
 
   <script>
@@ -212,9 +195,8 @@
       fetch(this.action, { method: 'POST', body: new FormData(this) })
         .then(() => {
           this.style.display = 'none';
-          // You can add success message here if you want
-          alert("Order submitted! Redirecting to PayPal...");
-          window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
+          document.getElementById('successMessage').style.display = 'block';
+          document.getElementById('paypalLink').href = `https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`;
         });
     });
 
