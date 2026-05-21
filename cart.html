@@ -32,8 +32,7 @@
       display: flex;
       justify-content: space-between;
     }
-    .totals { font-size: 1.1rem; margin: 1.5rem 0; }
-    .total { font-size: 1.9rem; font-weight: 700; text-align: right; color: var(--accent); margin: 1rem 0; }
+    .total { font-size: 1.9rem; font-weight: 700; text-align: right; margin: 2rem 0; color: var(--accent); }
 
     label { display: block; margin: 1rem 0 0.3rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
@@ -72,9 +71,7 @@
   <div class="cart-container">
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
-
-    <div class="totals" id="totals"></div>
-    <div class="total" id="grand-total">Total: $0.00</div>
+    <div class="total" id="grand-total">Calculating...</div>
 
     <h2 style="margin-top: 3rem;">Shipping & Order Information</h2>
 
@@ -84,7 +81,6 @@
       <input type="hidden" name="cart_summary" id="cart_summary">
       <input type="hidden" name="grand_total" id="grand_total_input">
 
-      <!-- Your form fields here (same as before) -->
       <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
@@ -148,11 +144,6 @@
       const shipping = 7;
       const grandTotal = subtotal + tax + shipping;
 
-      document.getElementById('totals').innerHTML = `
-        Subtotal: $${subtotal.toFixed(2)}<br>
-        Tax (6.25%): $${tax.toFixed(2)}<br>
-        Shipping: $7.00
-      `;
       document.getElementById('grand-total').textContent = `Grand Total: $${grandTotal.toFixed(2)}`;
       document.getElementById('cart_summary').value = summary;
       document.getElementById('grand_total_input').value = grandTotal.toFixed(2);
@@ -164,6 +155,13 @@
       localStorage.setItem('cart', JSON.stringify(cart));
       loadCart();
     }
+
+    // Handle form submission - open PayPal in new tab
+    document.getElementById('checkoutForm').addEventListener('submit', function() {
+      setTimeout(() => {
+        window.open('https://paypal.me/MimsSolutions/15', '_blank');
+      }, 800);
+    });
 
     // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
