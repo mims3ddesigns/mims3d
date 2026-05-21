@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'AW-18035820566');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18035820566');
+  </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DuckTrooper • Mims Solutions</title>
+  <title>DuckTrooper Figurine • Mims Solutions</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
@@ -24,88 +23,65 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: var(--bg-light); 
-      color: var(--text-dark); 
-      line-height: 1.7;
+    body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+    header { 
+      position: fixed; top: 0; width: 100%; background: var(--accent); 
+      z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+    }
+    nav { 
+      max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; 
+      display: flex; justify-content: space-between; align-items: center; 
+    }
+    .logo { 
+      font-family: 'Playfair Display', serif; font-size: 2.25rem; 
+      font-weight: 700; color: #000; letter-spacing: -1.2px; 
+    }
+    .nav-links a { 
+      color: #000; font-weight: 600; text-decoration: none; 
+      text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; 
+      margin-left: 2rem; 
+    }
+    .nav-links a:hover { color: #fff; }
+
+    .cart-icon {
+      display: flex; align-items: center; gap: 6px; 
+      text-decoration: none; color: #000; font-weight: 600; font-size: 1.1rem;
     }
 
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--accent);
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #000;
-    }
-    .nav-links a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      margin-left: 2rem;
-    }
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .product-hero { padding: 110px 5% 60px; max-width: 1100px; margin: 0 auto; }
+    .back-btn { color: var(--accent); font-weight: 600; text-decoration: none; margin-bottom: 1rem; display: inline-block; }
 
-    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
-
-    main {
-      padding-top: 140px;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 5%;
-    }
-
-    h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; }
-    .price { font-size: 2rem; color: var(--accent); text-align: center; margin: 1rem 0; }
-
-    img {
-      max-width: 520px;
-      width: 100%;
-      border-radius: 12px;
-      display: block;
-      margin: 2rem auto;
-    }
-
-    form {
+    .product-info {
       background: white;
-      padding: 2.5rem;
+      padding: 2rem;
       border-radius: 16px;
       border: 1px solid #E2E8E0;
+      margin-top: 2rem;
     }
-    label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
-    .required::after { content: " *"; color: red; }
-    input, select, textarea {
+
+    label { display: block; margin: 1.2rem 0 0.5rem; font-weight: 600; }
+    select, input, textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+
+    .btn {
       width: 100%;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-    button {
-      width: 100%;
-      padding: 1.3rem;
+      padding: 1.2rem;
       background: var(--accent);
       color: #000;
       font-weight: 700;
       border: none;
       border-radius: 50px;
-      margin-top: 2rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+    }
+
+    .shipping-note {
+      background: #f0f9ff;
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
     }
   </style>
 </head>
@@ -122,76 +98,88 @@
         <a href="../contact.html">CONTACT</a>
       </div>
       
-      <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+      <a href="../cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
 
-  <main>
-    <h1>DuckTrooper</h1>
-    <p class="price">$8.00</p>
+  <div class="product-hero">
+    <a href="../shop.html" class="back-btn">← Back to Shop</a>
+    
+    <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">DuckTrooper Figurine</h1>
+    <p style="font-size: 2rem; font-weight: 700; color: var(--accent);">$8 each</p>
 
-    <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
+    <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" 
+     style="width:100%; max-width:520px; border-radius:16px; margin:2rem 0;" alt="DuckTrooper">
 
-    <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
-      <input type="hidden" name="subject" value="New DuckTrooper Order">
+    <div class="product-info">
+      <h2>Add to Cart</h2>
 
-      <label class="required">Duck Body Color</label>
-      <select name="color" required>
-        <option value="">Choose Color</option>
+      <label>Duck Body Color</label>
+      <select id="color">
         <option value="Yellow">Yellow</option>
         <option value="White">White</option>
-        <option value="Red">Red</option>
         <option value="Black">Black</option>
-        <option value="Green">Green</option>
         <option value="Orange">Orange</option>
+        <option value="Red">Red</option>
         <option value="Purple">Purple</option>
       </select>
 
-      <label class="required">Quantity</label>
-      <input type="number" name="quantity" value="1" min="1" required>
+      <label>Quantity</label>
+      <input type="number" id="quantity" value="1" min="1">
 
-      <label class="required">Full Name</label>
-      <input type="text" name="name" required>
+      <label>Special Requests / Gift Message</label>
+      <textarea id="notes" rows="3" placeholder="Any special requests..."></textarea>
 
-      <label class="required">Email</label>
-      <input type="email" name="email" required>
-
-      <label class="required">Phone</label>
-      <input type="tel" name="phone" required>
-
-      <label class="required">Street Address</label>
-      <input type="text" name="street" required>
-
-      <label>Apartment / Suite / Unit (optional)</label>
-      <input type="text" name="apt">
-
-      <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:1rem;">
-        <div><label class="required">City</label><input type="text" name="city" required></div>
-        <div><label class="required">State</label><input type="text" name="state" required></div>
-        <div><label class="required">ZIP Code</label><input type="text" name="zip" required></div>
+      <div class="shipping-note">
+        <strong>Shipping:</strong> $7 flat rate (US only)
       </div>
 
-      <label>Order Notes (optional)</label>
-      <textarea name="notes" rows="4"></textarea>
-
-      <button type="submit">Submit Order & Pay with PayPal</button>
-    </form>
-  </main>
+      <button onclick="addToCart()" class="btn">Add to Cart - $8</button>
+    </div>
+  </div>
 
   <script>
-    const form = document.getElementById('orderForm');
+    function addToCart() {
+      const color = document.getElementById('color').value;
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const notes = document.getElementById('notes').value;
 
-    form.addEventListener('submit', function(e) {
-      // Let Web3Forms send the email first
-      // Then open PayPal
-      setTimeout(() => {
-        window.open('https://paypal.me/MimsSolutions/8', '_blank');
-      }, 800); // Small delay so the form can submit
+      const item = {
+        id: Date.now(),
+        name: "DuckTrooper Figurine",
+        price: 8,
+        quantity: quantity,
+        color: color,
+        notes: notes
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert(`✅ Added ${quantity}x DuckTrooper (${color}) to cart!`);
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    // Mobile menu (simple version)
-    // You can add the full one later if needed
+    window.onload = updateCartCount;
   </script>
 </body>
 </html>
