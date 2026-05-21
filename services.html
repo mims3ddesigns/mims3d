@@ -12,108 +12,28 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mims Solutions Services - 3D Printing, Rapid Prototyping, and Design Consulting">
   <title>Services • Mims Solutions</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <style>
-    :root {
-      --bg-light: #F8F9F6;
-      --text-dark: #1F2521;
-      --accent: #0D9488;
-    }
+    :root { --accent: #0D9488; }
+    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: var(--bg-light); 
-      color: var(--text-dark); 
-      line-height: 1.7;
-    }
+    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    /* Header - Matching About.html */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--accent);
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #000;
-      letter-spacing: -1.2px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
-    .nav-links a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
+    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
+    main { padding-top: 180px; max-width: 1400px; margin: 0 auto; padding: 0 5% 6rem; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 8vw, 6rem); text-align: center; margin-bottom: 1rem; }
+    .subtitle { text-align: center; font-size: 1.4rem; color: #47555E; margin-bottom: 4rem; max-width: 800px; margin-left: auto; margin-right: auto; }
 
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
-
-    main {
-      padding-top: 140px;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-bottom: 6rem;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 8vw, 6rem);
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 1.4rem;
-      color: #47555E;
-      margin-bottom: 4rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -124,25 +44,12 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      transition: transform 0.3s;
     }
-    .service-card:hover {
-      transform: translateY(-10px);
-    }
-    .service-img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-    }
-    .card-content {
-      padding: 2rem;
-    }
-    .card-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
+    .service-card:hover { transform: translateY(-10px); }
+    .service-img { width: 100%; height: 240px; object-fit: cover; }
+    .card-content { padding: 2rem; }
+    .card-content h2 { font-family: 'Playfair Display', serif; font-size: 2.1rem; color: var(--accent); margin-bottom: 1rem; }
+
     .btn {
       display: inline-block;
       padding: 1rem 2rem;
@@ -154,29 +61,15 @@
       margin-top: 1rem;
     }
 
-    /* ==================== MOBILE MENU ==================== */
     @media (max-width: 768px) {
       .nav-links {
-        position: fixed;
-        top: 0; right: 0; bottom: 0;
-        width: 70%;
-        background: #1a3c2e;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.4s ease;
-        z-index: 999;
+        position: fixed; top: 0; right: 0; bottom: 0; width: 70%;
+        background: #1a3c2e; flex-direction: column; justify-content: center; align-items: center;
+        transform: translateX(100%); transition: transform 0.4s ease; z-index: 999;
       }
-      .nav-links.show {
-        transform: translateX(0);
-      }
-      .menu-toggle {
-        display: block;
-      }
-      main {
-        padding-top: 120px;
-      }
+      .nav-links.show { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      main { padding-top: 130px; }
     }
   </style>
 </head>
@@ -192,11 +85,7 @@
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
       </div>
-      
-      <a href="cart.html" class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </a>
-
+      <a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
@@ -207,7 +96,7 @@
     
     <div class="services-grid">
       <div class="service-card">
-        <img src="https://cdn.thefabricator.com/a/metal-3d-printer-eliminates-the-debinding-process-1594824704.jpg" alt="Advanced 3D printing" class="service-img">
+        <img src="https://cdn.thefabricator.com/a/metal-3d-printer-eliminates-the-debinding-process-1594824704.jpg" alt="3D Printing" class="service-img">
         <div class="card-content">
           <h2>3D Printing</h2>
           <p>State-of-the-art 3D printing services using FDM technology. From functional prototypes to end-use production parts.</p>
@@ -216,7 +105,7 @@
       </div>
 
       <div class="service-card">
-        <img src="https://lodestar3d.com/wp-content/uploads/2024/01/DALL%C2%B7E-2024-05-27-19.39.21-A-high-resolution-image-of-a-3D-printer-in-action-with-the-print-head-visible-as-it-layers-a-detailed-prototype.-The-background-displays-various-comp-1024x646.webp" alt="Rapid prototyping" class="service-img">
+        <img src="https://lodestar3d.com/wp-content/uploads/2024/01/DALL%C2%B7E-2024-05-27-19.39.21-A-high-resolution-image-of-a-3D-printer-in-action-with-the-print-head-visible-as-it-layers-a-detailed-prototype.-The-background-displays-various-comp-1024x646.webp" alt="Rapid Prototyping" class="service-img">
         <div class="card-content">
           <h2>Rapid Prototyping</h2>
           <p>Accelerate your product development with fast-turnaround prototypes and iteration.</p>
@@ -225,7 +114,7 @@
       </div>
 
       <div class="service-card">
-        <img src="https://i.all3dp.com/workers/images/fit=scale-down,w=1200,h=671,quality=79,gravity=0.5x0.5,format=auto/wp-content/uploads/2020/12/02161635/AdobeStock_292340919-plus-Fusion-360-DfAM-hero_-1-scaled.jpg" alt="Design consulting" class="service-img">
+        <img src="https://i.all3dp.com/workers/images/fit=scale-down,w=1200,h=671,quality=79,gravity=0.5x0.5,format=auto/wp-content/uploads/2020/12/02161635/AdobeStock_292340919-plus-Fusion-360-DfAM-hero_-1-scaled.jpg" alt="Design Consulting" class="service-img">
         <div class="card-content">
           <h2>Design Consulting – DfM & DfAM</h2>
           <p>Expert guidance to optimize your designs for additive manufacturing.</p>
@@ -236,7 +125,6 @@
   </main>
 
   <script>
-    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
@@ -244,13 +132,11 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    // Cart count
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
-
     window.onload = updateCartCount;
   </script>
 </body>
