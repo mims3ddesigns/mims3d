@@ -18,27 +18,85 @@
   
   <style>
     :root { --accent: #0D9488; }
-    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
-    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; margin-left: 2rem; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      line-height: 1.7;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--accent);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #000;
+    }
+    .nav-links a {
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      margin-left: 2rem;
+    }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
-    main { padding-top: 180px; max-width: 900px; margin: 0 auto; padding: 0 5%; }
+
+    .cart-icon {
+      font-size: 1.6rem;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+    }
+
+    main {
+      padding-top: 180px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
     h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; }
     .price { font-size: 2rem; color: var(--accent); text-align: center; margin: 1rem 0; }
-
     img { max-width: 380px; width: 100%; border-radius: 12px; display: block; margin: 2rem auto; }
 
     form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; }
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
-    input, select, textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+    input, select { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
 
-    #price-breakdown { background: #f8f9f6; padding: 1.5rem; border-radius: 12px; margin: 2rem 0; font-size: 1.2rem; }
-    #grand-total { font-size: 2rem; font-weight: 700; color: var(--accent); text-align: center; margin: 1.5rem 0; }
-
-    button { width: 100%; padding: 1.3rem; background: var(--accent); color: #000; font-weight: 700; border: none; border-radius: 50px; margin-top: 1rem; cursor: pointer; }
+    .btn {
+      width: 100%;
+      padding: 1.3rem;
+      background: #1a3c2e;
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      margin-top: 1.5rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -53,6 +111,7 @@
         <a href="../about.html">ABOUT</a>
         <a href="../contact.html">CONTACT</a>
       </div>
+      
       <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
@@ -64,11 +123,8 @@
 
     <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
 
-    <form id="orderForm">
-      <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
-      <input type="hidden" name="subject" value="New DuckTrooper Order">
-
-      <label class="required">Duck Body Color</label>
+    <form id="addToCartForm">
+      <label class="required">Color</label>
       <select name="color" required>
         <option value="">Choose Color</option>
         <option value="Yellow">Yellow</option>
@@ -83,86 +139,49 @@
       <label class="required">Quantity</label>
       <input type="number" id="quantity" name="quantity" value="1" min="1" required>
 
-      <!-- Shipping & Personal Info -->
-      <label class="required">Full Name</label>
-      <input type="text" name="name" required>
-
-      <label class="required">Email</label>
-      <input type="email" name="email" required>
-
-      <label class="required">Phone</label>
-      <input type="tel" name="phone" required>
-
-      <label class="required">Street Address</label>
-      <input type="text" name="street" required>
-
-      <label>Apartment / Suite / Unit (optional)</label>
-      <input type="text" name="apt">
-
-      <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:1rem;">
-        <div><label class="required">City</label><input type="text" name="city" required></div>
-        <div><label class="required">State</label><input type="text" name="state" required></div>
-        <div><label class="required">ZIP Code</label><input type="text" name="zip" required></div>
-      </div>
-
-      <label>Order Notes (optional)</label>
-      <textarea name="notes" rows="4"></textarea>
-
-      <!-- Live Price Breakdown -->
-      <div id="price-breakdown"></div>
-      <div id="grand-total"></div>
-
-      <button type="submit">Submit Order & Pay with PayPal</button>
+      <button type="submit" class="btn">Add to Cart</button>
     </form>
   </main>
 
   <script>
-    const quantityInput = document.getElementById('quantity');
-    const breakdown = document.getElementById('price-breakdown');
-    const grandEl = document.getElementById('grand-total');
-    let grandTotal = 0;
-
-    function updatePrice() {
-      const qty = parseInt(quantityInput.value) || 1;
-      const subtotal = qty * 8;
-      const tax = subtotal * 0.0625;
-      const shipping = 7;
-      grandTotal = subtotal + tax + shipping;
-
-      breakdown.innerHTML = `
-        <strong>Subtotal:</strong> $${subtotal.toFixed(2)}<br>
-        <strong>Sales Tax (6.25%):</strong> $${tax.toFixed(2)}<br>
-        <strong>Shipping:</strong> $7.00
-      `;
-      grandEl.innerHTML = `<strong>Grand Total: $${grandTotal.toFixed(2)}</strong>`;
-    }
-
-    quantityInput.addEventListener('input', updatePrice);
-    updatePrice(); // Initial calculation
-
-    // Form submit
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: new FormData(this)
-      })
-      .then(() => {
-        window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
-      })
-      .catch(() => alert("Error submitting order. Please try again."));
-    });
-
-    // Mobile Menu (if needed)
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
-        menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    });
+
+    // Add to Cart
+    document.getElementById('addToCartForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const color = this.color.value;
+      const qty = parseInt(this.quantity.value) || 1;
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      cart.push({
+        id: Date.now(),
+        name: "DuckTrooper",
+        price: 8,
+        color: color,
+        quantity: qty
       });
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      alert(`✅ Added ${qty}x DuckTrooper (${color}) to cart!`);
+      window.location.href = '../cart.html';
+    });
+
+    // Cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
     }
+    window.onload = updateCartCount;
   </script>
 </body>
 </html>
