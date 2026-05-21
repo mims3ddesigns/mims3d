@@ -132,21 +132,24 @@
 <body>
 
   <header>
-    <nav>
-      <div class="logo">Mims Solutions</div>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html" class="active">HOME</a>
-        <a href="services.html">SERVICES</a>
-        <a href="shop.html">SHOP</a>
-        <a href="about.html">ABOUT</a>
-        <a href="contact.html">CONTACT</a>
-      </div>
-      
-      <a href="cart.html" class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </a>
-    </nav>
-  </header>
+  <nav>
+    <div class="logo">Mims Solutions</div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">HOME</a>
+      <a href="services.html">SERVICES</a>
+      <a href="shop.html">SHOP</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+    
+    <!-- Cart Icon -->
+    <a href="cart.html" class="cart-icon">
+      🛒 <span id="cart-count">0</span>
+    </a>
+
+    <div class="menu-toggle" id="menuToggle">☰</div>
+  </nav>
+</header>
 
   <section class="hero">
     <div class="hero-content">
@@ -168,14 +171,23 @@
     </div>
   </section>
 
-  <script>
-    // Cart count
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const countEl = document.getElementById('cart-count');
-      if (countEl) countEl.textContent = cart.length;
-    }
-    window.onload = updateCartCount;
-  </script>
+ <script>
+  // Mobile Menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+    menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+  });
+
+  // Cart count
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const countEl = document.getElementById('cart-count');
+    if (countEl) countEl.textContent = cart.length;
+  }
+
+  window.onload = updateCartCount;
+</script>
 </body>
 </html>
