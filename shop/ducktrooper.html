@@ -31,7 +31,6 @@
       line-height: 1.7;
     }
 
-    /* Header - Matching About.html */
     header {
       position: fixed;
       top: 0;
@@ -53,11 +52,6 @@
       font-size: 2.25rem;
       font-weight: 700;
       color: #000;
-      letter-spacing: -1.2px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
     }
     .nav-links a {
       color: #000;
@@ -65,61 +59,28 @@
       text-decoration: none;
       text-transform: uppercase;
       font-size: 0.95rem;
-      letter-spacing: 1px;
+      margin-left: 2rem;
     }
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #fff;
-    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #000;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
 
     main {
       padding-top: 140px;
-      max-width: 1000px;
+      max-width: 900px;
       margin: 0 auto;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-bottom: 6rem;
+      padding: 0 5%;
     }
 
-    .product-hero {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 7vw, 5rem);
-      margin-bottom: 0.5rem;
-    }
-    .price {
-      font-size: 2rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
+    h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; }
+    .price { font-size: 2rem; color: var(--accent); text-align: center; margin: 1rem 0; }
 
     img {
       max-width: 520px;
       width: 100%;
       border-radius: 12px;
-      margin: 2rem auto;
       display: block;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      margin: 2rem auto;
     }
 
     form {
@@ -127,26 +88,15 @@
       padding: 2.5rem;
       border-radius: 16px;
       border: 1px solid #E2E8E0;
-      margin-top: 2rem;
     }
-
-    label { 
-      display: block; 
-      margin: 1.2rem 0 0.4rem; 
-      font-weight: 600; 
-    }
-    .required::after {
-      content: " *";
-      color: red;
-    }
-
+    label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
+    .required::after { content: " *"; color: red; }
     input, select, textarea {
       width: 100%;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
-
     button {
       width: 100%;
       padding: 1.3rem;
@@ -155,27 +105,7 @@
       font-weight: 700;
       border: none;
       border-radius: 50px;
-      font-size: 1.15rem;
       margin-top: 2rem;
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed;
-        top: 0; right: 0; bottom: 0;
-        width: 70%;
-        background: #1a3c2e;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateX(100%);
-        transition: transform 0.4s ease;
-        z-index: 999;
-      }
-      .nav-links.show { transform: translateX(0); }
-      .menu-toggle { display: block; }
-      main { padding-top: 120px; }
     }
   </style>
 </head>
@@ -192,30 +122,23 @@
         <a href="../contact.html">CONTACT</a>
       </div>
       
-      <a href="../cart.html" class="cart-icon">
-        🛒 <span id="cart-count">0</span>
-      </a>
-
-      <div class="menu-toggle" id="menuToggle">☰</div>
+      <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
     </nav>
   </header>
 
   <main>
-    <div class="product-hero">
-      <h1>DuckTrooper</h1>
-      <p class="price">$8.00 each</p>
-    </div>
+    <h1>DuckTrooper</h1>
+    <p class="price">$8.00</p>
 
-    <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" 
-         alt="DuckTrooper Figurine">
+    <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
 
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New DuckTrooper Order">
 
-      <label class="required">Color</label>
+      <label class="required">Duck Body Color</label>
       <select name="color" required>
-        <option value="">Select Color</option>
+        <option value="">Choose Color</option>
         <option value="Yellow">Yellow</option>
         <option value="White">White</option>
         <option value="Red">Red</option>
@@ -231,58 +154,44 @@
       <label class="required">Full Name</label>
       <input type="text" name="name" required>
 
-      <label>Company Name (optional)</label>
-      <input type="text" name="company">
-
-      <label class="required">Email Address</label>
+      <label class="required">Email</label>
       <input type="email" name="email" required>
 
-      <label class="required">Phone Number</label>
+      <label class="required">Phone</label>
       <input type="tel" name="phone" required>
 
       <label class="required">Street Address</label>
       <input type="text" name="street" required>
 
-      <label>Apartment, Suite, Unit (optional)</label>
+      <label>Apartment / Suite / Unit (optional)</label>
       <input type="text" name="apt">
 
-      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
-        <div>
-          <label class="required">City</label>
-          <input type="text" name="city" required>
-        </div>
-        <div>
-          <label class="required">State</label>
-          <input type="text" name="state" required>
-        </div>
-        <div>
-          <label class="required">ZIP Code</label>
-          <input type="text" name="zip" required>
-        </div>
+      <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:1rem;">
+        <div><label class="required">City</label><input type="text" name="city" required></div>
+        <div><label class="required">State</label><input type="text" name="state" required></div>
+        <div><label class="required">ZIP Code</label><input type="text" name="zip" required></div>
       </div>
 
       <label>Order Notes (optional)</label>
-      <textarea name="notes" rows="4" placeholder="Special instructions, gift message, etc."></textarea>
+      <textarea name="notes" rows="4"></textarea>
 
       <button type="submit">Submit Order & Pay with PayPal</button>
     </form>
   </main>
 
   <script>
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    const form = document.getElementById('orderForm');
+
+    form.addEventListener('submit', function(e) {
+      // Let Web3Forms send the email first
+      // Then open PayPal
+      setTimeout(() => {
+        window.open('https://paypal.me/MimsSolutions/8', '_blank');
+      }, 800); // Small delay so the form can submit
     });
 
-    function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const countEl = document.getElementById('cart-count');
-      if (countEl) countEl.textContent = cart.length;
-    }
-    window.onload = updateCartCount;
+    // Mobile menu (simple version)
+    // You can add the full one later if needed
   </script>
 </body>
 </html>
