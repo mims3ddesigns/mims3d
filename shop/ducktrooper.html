@@ -40,7 +40,7 @@
   <header>
     <nav>
       <div class="logo">Mims Solutions</div>
-      <div class="nav-links" id="navLinks">
+      <div class="nav-links">
         <a href="../index.html">HOME</a>
         <a href="../services.html">SERVICES</a>
         <a href="../shop.html">SHOP</a>
@@ -57,7 +57,7 @@
 
     <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
 
-    <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
+    <form id="orderForm">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New DuckTrooper Order">
 
@@ -109,14 +109,24 @@
     const quantityInput = document.getElementById('quantity');
 
     form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
       const qty = parseInt(quantityInput.value) || 1;
       const total = qty * 8;
 
-      // Submit form to Web3Forms first
-      // Then open PayPal with correct amount
-      setTimeout(() => {
+      // Submit to Web3Forms
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(() => {
+        // After successful submission, open PayPal
         window.open(`https://paypal.me/MimsSolutions/${total}`, '_blank');
-      }, 800);
+      })
+      .catch(err => {
+        alert("Something went wrong. Please try again.");
+        console.error(err);
+      });
     });
   </script>
 </body>
