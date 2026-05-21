@@ -32,7 +32,7 @@
       line-height: 1.7;
     }
 
-    /* Consistent Header */
+    /* Header - Matching About.html */
     header {
       position: fixed;
       top: 0;
@@ -73,7 +73,6 @@
       color: #fff;
     }
 
-    /* Cart Icon */
     .cart-icon {
       display: flex;
       align-items: center;
@@ -84,8 +83,15 @@
       font-weight: 600;
     }
 
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+    }
+
     main {
-      padding-top: 160px;   /* Fixed the overlapping issue */
+      padding-top: 140px;
       max-width: 1400px;
       margin: 0 auto;
       padding-left: 5%;
@@ -147,20 +153,14 @@
       text-decoration: none;
       margin-top: 1rem;
     }
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
 
-    /* Mobile Menu */
+    /* ==================== MOBILE MENU ==================== */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
         top: 0; right: 0; bottom: 0;
         width: 70%;
-        background: #1a3c2e;           /* Dark green like About page */
+        background: #1a3c2e;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -178,35 +178,34 @@
         padding-top: 120px;
       }
     }
-    @media (max-width: 768px) {
-      main { padding-top: 130px; }
-    }
   </style>
 </head>
 <body>
 
- <header>
-  <nav>
-    <div class="logo">Mims Solutions</div>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">HOME</a>
-      <a href="services.html">SERVICES</a>
-      <a href="shop.html">SHOP</a>
-      <a href="about.html">ABOUT</a>
-      <a href="contact.html">CONTACT</a>
-    </div>
-    
-    <a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
-    <div class="menu-toggle" id="menuToggle">☰</div>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <div class="logo">Mims Solutions</div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">HOME</a>
+        <a href="services.html" class="active">SERVICES</a>
+        <a href="shop.html">SHOP</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+      </div>
+      
+      <a href="cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
+    </nav>
+  </header>
 
   <main>
     <h1>Our Services</h1>
     <p class="subtitle">Precision additive manufacturing solutions tailored for innovation, speed, and performance — right here in Austin, Texas.</p>
     
     <div class="services-grid">
-      <!-- Service 1 -->
       <div class="service-card">
         <img src="https://cdn.thefabricator.com/a/metal-3d-printer-eliminates-the-debinding-process-1594824704.jpg" alt="Advanced 3D printing" class="service-img">
         <div class="card-content">
@@ -216,7 +215,6 @@
         </div>
       </div>
 
-      <!-- Service 2 -->
       <div class="service-card">
         <img src="https://lodestar3d.com/wp-content/uploads/2024/01/DALL%C2%B7E-2024-05-27-19.39.21-A-high-resolution-image-of-a-3D-printer-in-action-with-the-print-head-visible-as-it-layers-a-detailed-prototype.-The-background-displays-various-comp-1024x646.webp" alt="Rapid prototyping" class="service-img">
         <div class="card-content">
@@ -226,7 +224,6 @@
         </div>
       </div>
 
-      <!-- Service 3 -->
       <div class="service-card">
         <img src="https://i.all3dp.com/workers/images/fit=scale-down,w=1200,h=671,quality=79,gravity=0.5x0.5,format=auto/wp-content/uploads/2020/12/02161635/AdobeStock_292340919-plus-Fusion-360-DfAM-hero_-1-scaled.jpg" alt="Design consulting" class="service-img">
         <div class="card-content">
@@ -247,11 +244,13 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
+    // Cart count
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
+
     window.onload = updateCartCount;
   </script>
 </body>
