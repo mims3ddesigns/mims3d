@@ -18,49 +18,117 @@
   
   <style>
     :root { --accent: #0D9488; }
-    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      line-height: 1.7;
+    }
 
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
-    .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--accent);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #000;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: #fff; }
 
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
-    .shop-hero { padding: 110px 5% 80px; text-align: center; }
+    .shop-hero {
+      text-align: center;
+      padding: 160px 5% 80px;
+      background: #F8F9F6;
+    }
+    .shop-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .shop-hero p {
+      font-size: 1.4rem;
+      color: #47555E;
+    }
+
     .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 5%;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 5% 5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
     }
     .product-card {
       background: white;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s;
       cursor: pointer;
-      transition: 0.3s;
     }
-    .product-card:hover { transform: translateY(-8px); }
-    .product-card img { width: 100%; height: 260px; object-fit: cover; }
-    .product-info { padding: 1.5rem; text-align: center; }
-    .price { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+    .product-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .product-info h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.35rem;
+    }
+    .price {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
 
     @media (max-width: 768px) {
       .nav-links {
-        position: fixed; top: 0; right: 0; bottom: 0; width: 70%;
-        background: #1a3c2e; flex-direction: column; justify-content: center; align-items: center;
-        transform: translateX(100%); transition: transform 0.4s ease; z-index: 999;
+        position: fixed; top:0; right:0; bottom:0; width:70%;
+        background:#1a3c2e; flex-direction:column;
+        justify-content:center; align-items:center;
+        transform:translateX(100%); transition:transform 0.4s ease; z-index:999;
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      .shop-hero { padding-top: 100px; }
+      .shop-hero { padding-top: 120px; }
     }
   </style>
 </head>
@@ -82,22 +150,34 @@
   </header>
 
   <div class="shop-hero">
-    <h1 style="font-family: 'Playfair Display', serif; font-size: 3.5rem;">Our Shop</h1>
-    <p style="font-size: 1.4rem; color: #47555E;">High-quality 3D printed products • Made in Texas</p>
+    <h1>Our Shop</h1>
+    <p>High-quality 3D printed products • Made in Texas</p>
   </div>
 
   <div class="shop-grid">
-    <div class="product-card" onclick="window.location.href='shop/ducktrooper.html'">
-      <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
+
+    <!-- DuckTrooper -->
+    <div class="product-card" onclick="window.location.href='ducktrooper.html'">
+      <img src="images/ducktrooper.jpg" alt="DuckTrooper">
       <div class="product-info">
         <h3>DuckTrooper</h3>
-        <p style="color:#666;">Custom colors available</p>
-        <div class="price">$8</div>
+        <p class="price">$8.00</p>
       </div>
     </div>
+
+    <!-- SD & microSD Card Organizer -->
+    <div class="product-card" onclick="window.location.href='sd-card-organizer.html'">
+      <img src="images/sd-card-organizer.jpg" alt="SD Card Organizer">
+      <div class="product-info">
+        <h3>SD & microSD Card Organizer</h3>
+        <p class="price">$12.00</p>
+      </div>
+    </div>
+
   </div>
 
   <script>
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
@@ -105,6 +185,7 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
+    // Cart count
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
@@ -112,17 +193,19 @@
     }
     window.onload = updateCartCount;
   </script>
-<footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
-  <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
-  <p>
-    <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
-    <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
-  </p>
-  <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
-  <p>
-    <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
-    <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
-  </p>
-</footer>
+
+  <!-- Footer -->
+  <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
+    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
+    <p>
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
+    </p>
+    <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
+    <p>
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
+      <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
+    </p>
+  </footer>
 </body>
 </html>
