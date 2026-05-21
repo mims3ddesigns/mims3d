@@ -18,67 +18,21 @@
   
   <style>
     :root { --accent: #0D9488; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: #F8F9F6; 
-      color: #1F2521; 
-      line-height: 1.7;
-    }
+    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
 
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: var(--accent);
-      z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    nav {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 1.2rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: #000;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
-    .nav-links a {
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 0.95rem;
-      letter-spacing: 1px;
-    }
-    .nav-links a:hover,
-    .nav-links a.active { color: #fff; }
+    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
 
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
-    .shop-hero {
-      text-align: center;
-      padding: 160px 5% 80px;
-      background: #F8F9F6;
-    }
-    .shop-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.8rem;
-      margin-bottom: 0.5rem;
-    }
-    .shop-hero p {
-      font-size: 1.4rem;
-      color: #47555E;
-    }
+    .shop-hero { text-align: center; padding: 160px 5% 80px; }
+    .shop-hero h1 { font-family: 'Playfair Display', serif; font-size: 3.8rem; margin-bottom: 0.5rem; }
+    .shop-hero p { font-size: 1.4rem; color: #47555E; }
 
     .shop-grid {
       display: grid;
@@ -96,36 +50,14 @@
       transition: all 0.3s;
       cursor: pointer;
     }
-    .product-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    }
-    .product-card img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-    }
-    .product-info {
-      padding: 1.2rem;
-      text-align: center;
-    }
-    .product-info h3 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.35rem;
-    }
-    .price {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 1.4rem;
-    }
+    .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+    .product-card img { width: 100%; height: 280px; object-fit: cover; }
+    .product-info { padding: 1.2rem; text-align: center; }
+    .product-info h3 { margin: 0 0 0.5rem 0; font-size: 1.35rem; }
+    .price { color: var(--accent); font-weight: 700; font-size: 1.4rem; }
 
     @media (max-width: 768px) {
-      .nav-links {
-        position: fixed; top:0; right:0; bottom:0; width:70%;
-        background:#1a3c2e; flex-direction:column;
-        justify-content:center; align-items:center;
-        transform:translateX(100%); transition:transform 0.4s ease; z-index:999;
-      }
+      .nav-links { position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e; flex-direction:column; justify-content:center; align-items:center; transform:translateX(100%); transition:transform 0.4s ease; z-index:999; }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
       .shop-hero { padding-top: 120px; }
@@ -165,7 +97,7 @@
       </div>
     </div>
 
-    <!-- SD & microSD Card Organizer -->
+    <!-- SD Card Organizer -->
     <div class="product-card" onclick="window.location.href='sd-card-organizer.html'">
       <img src="images/sd-card-organizer.jpg" alt="SD Card Organizer">
       <div class="product-info">
@@ -177,7 +109,6 @@
   </div>
 
   <script>
-    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
@@ -185,7 +116,6 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    // Cart count
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const countEl = document.getElementById('cart-count');
