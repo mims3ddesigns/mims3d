@@ -64,21 +64,11 @@
       color: #fff;
     }
 
-    .cart-icon {
-      font-size: 1.6rem;
-      text-decoration: none;
-      color: #000;
-    }
-
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #000;
-    }
+    .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
+    .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
     main {
-      padding-top: 250px;
+      padding-top: 220px;   /* Increased padding */
       max-width: 900px;
       margin: 0 auto;
       padding: 0 5%;
@@ -127,7 +117,7 @@
       cursor: pointer;
     }
 
-    /* ==================== MOBILE MENU ==================== */
+    /* Mobile */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -230,17 +220,19 @@
     }
     window.onload = updateCartCount;
   </script>
+
+  <!-- Consistent Footer -->
   <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
-  <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
-  <p>
-    <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
-    <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
-  </p>
-  <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
-  <p>
-    <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
-    <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
-  </p>
-</footer>
+    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
+    <p>
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
+    </p>
+    <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
+    <p>
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
+      <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
+    </p>
+  </footer>
 </body>
 </html>
