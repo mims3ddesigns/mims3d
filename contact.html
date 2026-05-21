@@ -1,58 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18035820566"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'AW-18035820566');
 </script>
-<meta name="description" content="Mims Solutions: Custom 3D printing, rapid prototyping, and design consulting in additive manufacturing. Based in Austin, TX – serving clients nationwide.">
-<meta name="keywords" content="3D printing Austin, additive manufacturing Texas, custom prototypes, rapid prototyping, DfAM consulting, 3D design services">
-<meta property="og:title" content="Mims Solutions | Precision Additive Manufacturing">
-<meta property="og:description" content="Turning ideas into reality with high-quality 3D printing and engineering expertise.">
-<meta property="og:image" content="https://mims3d.com/path-to-your-hero-image.jpg"> <!-- if you have one -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Get in touch with Mims Solutions for custom 3D printing and additive manufacturing projects.">
   <title>Contact • Mims Solutions</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-  --bg-light: #F8F9F6;        /* Main background */
-  --text-dark: #1F2521;       /* Main text */
-  --text-medium: #47555E;     /* Secondary text */
-  --accent: #0D9488;          /* Teal accent */
-  --accent-dark: #0B7A70;
-  --card-bg: #FFFFFF;
-  --border: #E2E8E0;
-}
-
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      color: var(--text);
-      background: var(--bg-dark);
-      line-height: 1.7;
-      min-height: 100vh;
+      --bg-light: #F8F9F6;
+      --text-dark: #1F2521;
+      --accent: #0D9488;
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: var(--bg-light); 
+      color: var(--text-dark); 
+      line-height: 1.7;
+    }
+
+    /* Consistent Header with Cart */
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      z-index: 1000;
       background: var(--accent);
+      z-index: 1000;
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
-
     nav {
       max-width: 1400px;
       margin: 0 auto;
@@ -61,45 +49,46 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
+      font-size: 2.25rem;
       font-weight: 700;
       color: #000;
-      letter-spacing: -1px;
+      letter-spacing: -1.2px;
     }
-
     .nav-links {
       display: flex;
       gap: 2.5rem;
     }
-
     .nav-links a {
       color: #000;
       font-weight: 600;
       text-decoration: none;
-      transition: color 0.25s;
       text-transform: uppercase;
       font-size: 0.95rem;
       letter-spacing: 1px;
     }
-
     .nav-links a:hover,
-    .nav-links a.active { color: #fff; }
+    .nav-links a.active {
+      color: #fff;
+    }
 
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
+    /* Cart Icon */
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
       color: #000;
+      font-size: 1.5rem;
+      font-weight: 600;
     }
 
     main {
       padding-top: 140px;
       max-width: 900px;
       margin: 0 auto;
-      padding: 140px 5% 6rem;
+      padding: 0 5% 6rem;
       text-align: center;
     }
 
@@ -109,43 +98,22 @@
       margin-bottom: 1rem;
     }
 
-    .subtitle {
-      font-size: 1.3rem;
-      color: var(--text-light);
-      margin-bottom: 3rem;
-    }
-
     form {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(94,234,212,0.2);
-      border-radius: var(--radius);
+      background: white;
       padding: 2.5rem;
+      border-radius: 16px;
+      border: 1px solid #E2E8E0;
       text-align: left;
+      margin-top: 2rem;
     }
 
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-
+    label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
     input, textarea {
       width: 100%;
       padding: 1rem;
       margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--accent);
+      border: 1px solid #ccc;
       border-radius: 8px;
-      color: var(--text);
-      font-size: 1rem;
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent-dark);
-      box-shadow: 0 0 0 3px rgba(94,234,212,0.2);
     }
 
     button {
@@ -156,52 +124,19 @@
       font-weight: 700;
       border-radius: 50px;
       cursor: pointer;
-      transition: all 0.3s;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    button:hover {
-      background: var(--accent-dark);
-      transform: translateY(-3px);
-    }
-
-    .direct-info {
-      margin: 4rem 0 2rem;
-      font-size: 1.2rem;
-    }
-
-    .direct-info a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .direct-info a:hover { color: #fff; }
-
-    .etsy-link {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 1rem 2rem;
-      background: #f1641e; /* Etsy orange */
-      color: white;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: all 0.3s;
-    }
-
-    .etsy-link:hover {
-      background: #e04e0d;
-      transform: translateY(-3px);
+      width: 100%;
     }
 
     @media (max-width: 768px) {
       .nav-links {
         position: fixed; top:0; right:0; bottom:0; width:70%;
-        background: #388062;
-        flex-direction: column; justify-content: center; align-items: center;
-        transform: translateX(100%); transition: transform 0.4s ease; z-index:999;
+        background: #1a3c2e;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 999;
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
@@ -217,77 +152,76 @@
       <div class="nav-links" id="navLinks">
         <a href="index.html">HOME</a>
         <a href="services.html">SERVICES</a>
+        <a href="shop.html">SHOP</a>
         <a href="about.html">ABOUT</a>
         <a href="contact.html" class="active">CONTACT</a>
       </div>
+      
+      <!-- Cart Icon -->
+      <a href="cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
+
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
 
   <main>
     <h1>Get in Touch</h1>
-    <p class="subtitle">Ready to bring your idea to life with precision 3D printing or additive manufacturing? Drop us a message for a free quote or consultation — we're excited to help!</p>
+    <p class="subtitle">Ready to bring your idea to life? Drop us a message for a free quote or consultation.</p>
 
-    <!-- Simple mailto form (opens email client) -->
-<form action="https://api.web3forms.com/submit" method="POST">
-  <!-- Hidden field: your access key from web3forms.com (get it free in 10 seconds) -->
-  <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">  <!-- ← Get this from https://web3forms.com -->
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
+      <input type="hidden" name="subject" value="New Quote Request from Mims Solutions">
 
-  <!-- Optional: redirect after submit (to a thank-you page) -->
-  <input type="hidden" name="redirect" value="https://yourdomain.com/thanks.html">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required>
 
-  <!-- Optional: subject line for your email -->
-  <input type="hidden" name="subject" value="New Quote Request from Mims Solutions">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
 
-  <label for="name">Your Name</label>
-  <input type="text" id="name" name="name" required placeholder="Edwin Hubble">
+      <label for="phone">Phone (optional)</label>
+      <input type="tel" id="phone" name="phone">
 
-  <label for="email">Email Address</label>
-  <input type="email" id="email" name="email" required placeholder="your@email.com">
+      <label for="message">Your Message / Project Details</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
 
-  <label for="phone">Phone (optional)</label>
-  <input type="tel" id="phone" name="phone" placeholder="(720) 468-1128">
+      <button type="submit">Send Message</button>
+    </form>
 
-  <label for="message">Your Message / Project Details</label>
-  <textarea id="message" name="message" rows="6" required placeholder="Tell us about your project: prototype needs, materials, quantity, timeline, or any files/sketches..."></textarea>
-
-  <!-- Honeypot for spam (leave empty) -->
-  <input type="checkbox" name="botcheck" id="botcheck" style="display:none;" />
-
-  <button type="submit">Send Message</button>
-</form>
-
-    <div class="direct-info">
+    <div class="direct-info" style="margin-top: 4rem;">
       <p>Or reach us directly:</p>
       <p><strong>Phone:</strong> <a href="tel:+17204681128">(720) 468-1128</a></p>
       <p><strong>Email:</strong> <a href="mailto:mims25solutions@gmail.com">mims25solutions@gmail.com</a></p>
-      <p>Now relocating to Austin, TX — serving clients nationwide with virtual consultations and shipping.</p>
     </div>
-
-    <a href="https://www.etsy.com/shop/Mims3Ddesigns?ref=seller-platform-mcnav" target="_blank" class="etsy-link">Browse Ready-Made Designs on Etsy</a>
   </main>
 
   <script>
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
-
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('show');
-        menuToggle.textContent = '☰';
-      });
-    });
+    window.onload = updateCartCount;
   </script>
-<footer style="background: var(--bg-darker); padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: var(--text-light); border-top: 1px solid rgba(94,234,212,0.1);">
-  <p>&copy; Mims Solutions. All rights reserved.</p>
-  <p><a href="tel:+17204681128" style="color: var(--accent);"> (720) 468-1128 </a> | <a href="mailto:mims.designs25@gmail.com" style="color: var(--accent);">mims25solutions@gmail.com</a></p>
-  <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
-  <p><a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: var(--accent);">Shop on Etsy</a> | <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: var(--accent);">Instagram</a></p>
-</footer>
+
+  <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8;">
+    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
+    <p>
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
+    </p>
+    <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
+  </footer>
 </body>
 </html>
