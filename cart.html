@@ -30,7 +30,6 @@
       line-height: 1.7;
     }
 
-    /* Header */
     header {
       position: fixed;
       top: 0;
@@ -60,7 +59,6 @@
       text-transform: uppercase;
       font-size: 0.95rem;
       letter-spacing: 1px;
-      margin-left: 2rem;
     }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
 
@@ -68,10 +66,12 @@
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
     main {
-      padding-top: 180px;
+      padding-top: 200px;   /* Increased to prevent overlap */
       max-width: 1000px;
       margin: 0 auto;
-      padding: 0 5% 6rem;
+      padding-left: 5%;
+      padding-right: 5%;
+      padding-bottom: 6rem;
     }
 
     h1 {
@@ -91,20 +91,17 @@
       align-items: center;
     }
 
-    .price-breakdown {
+    .price-breakdown, .grand-total {
       background: white;
       padding: 2rem;
       border-radius: 16px;
       margin: 2rem 0;
-      font-size: 1.2rem;
     }
-
     .grand-total {
       font-size: 2rem;
       font-weight: 700;
       text-align: right;
       color: var(--accent);
-      margin: 1.5rem 0;
     }
 
     form {
@@ -116,14 +113,12 @@
 
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
-
     input, textarea, select {
       width: 100%;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
-
     button {
       width: 100%;
       padding: 1.3rem;
@@ -137,7 +132,6 @@
       cursor: pointer;
     }
 
-    /* Mobile Menu */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
@@ -213,7 +207,7 @@
       </div>
 
       <label>Order Notes (optional)</label>
-      <textarea name="notes" rows="4" placeholder="Gift message, special instructions..."></textarea>
+      <textarea name="notes" rows="4"></textarea>
 
       <button type="submit">Submit Order & Pay with PayPal</button>
     </form>
@@ -238,7 +232,7 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * (item.quantity || 1);
         subtotal += itemTotal;
-        summary += `${item.quantity || 1}x ${item.name} (${item.color || 'N/A'}) - $${itemTotal.toFixed(2)}\n`;
+        summary += `${item.quantity || 1}x ${item.name} (${item.color || ''}) - $${itemTotal.toFixed(2)}\n`;
 
         container.innerHTML += `
           <div class="cart-item">
@@ -271,17 +265,14 @@
       loadCart();
     }
 
-    // Form submit
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
       e.preventDefault();
       fetch(this.action, { method: 'POST', body: new FormData(this) })
         .then(() => {
-          alert("Order submitted! Redirecting to PayPal...");
           window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
         });
     });
 
-    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
