@@ -26,7 +26,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
 
-    /* === FIXED HEADER - Matches index.html === */
+    /* Fixed Header with Cart */
     header {
       position: fixed;
       top: 0;
@@ -66,13 +66,17 @@
     .nav-links a.active {
       color: #fff;
     }
-    .menu-toggle {
-      display: none;
-      font-size: 2rem;
-      cursor: pointer;
+
+    /* Cart Icon */
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
       color: #000;
+      font-size: 1.5rem;
+      font-weight: 600;
     }
-    /* ========================================== */
 
     .shop-hero {
       padding: 110px 5% 80px;
@@ -100,13 +104,11 @@
       transform: translateY(-8px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.12);
     }
-
     .product-card img {
       width: 100%;
       height: 260px;
       object-fit: cover;
     }
-
     .product-info {
       padding: 1.5rem;
       text-align: center;
@@ -130,6 +132,12 @@
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
       </div>
+      
+      <!-- Cart Icon -->
+      <a href="cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
+
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
@@ -143,20 +151,30 @@
     <div class="product-card" onclick="window.location.href='shop/ducktrooper.html'">
       <img src="https://i.etsystatic.com/56737607/r/il/07c110/6887518391/il_fullxfull.6887518391_8nyu.jpg" alt="DuckTrooper">
       <div class="product-info">
-        <h3>DuckTrooper Figurine</h3>
+        <h3>DuckTrooper</h3>
         <p style="color:#666;">Custom colors available</p>
-        <div class="price">$8 </div>
+        <div class="price">$8</div>
       </div>
     </div>
   </div>
 
   <script>
+    // Update cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
+
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
+
+    window.onload = updateCartCount;
   </script>
 </body>
 </html>
