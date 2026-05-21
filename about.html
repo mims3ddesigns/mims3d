@@ -252,7 +252,16 @@
     <!-- <img src="https://thumbs.dreamstime.com/b/historic-district-waterfront-savannah-georgia-usa-sunset-228607166.jpg" alt="Savannah Waterfront at Sunset" style="width:100%; max-width:800px; display:block; margin:2rem auto; border-radius:var(--radius);"> -->
   </main>
 
- <script>
+<script>
+  // Mobile Menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+    menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+  });
+
   // Update cart count
   function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -260,15 +269,6 @@
     if (countEl) countEl.textContent = cart.length;
   }
 
-  // Mobile Menu
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.getElementById('navLinks');
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-    menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
-  });
-
-  // Run when page loads
   window.onload = updateCartCount;
 </script>
 <footer style="background: var(--bg-darker); padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: var(--text-light); border-top: 1px solid rgba(94,234,212,0.1);">
