@@ -18,21 +18,141 @@
   
   <style>
     :root { --accent: #0D9488; }
-    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
-    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; margin-left: 2rem; }
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
-    main { padding-top: 140px; max-width: 900px; margin: 0 auto; padding: 0 5%; }
-    h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; }
-    .price { font-size: 2rem; color: var(--accent); text-align: center; margin: 1rem 0; }
-    img { max-width: 520px; width: 100%; border-radius: 12px; display: block; margin: 2rem auto; }
-    form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      line-height: 1.7;
+    }
+
+    /* Header - Matching About.html */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--accent);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #000;
+      letter-spacing: -1.2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+    .nav-links a {
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+
+    .cart-icon {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: #000;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #000;
+    }
+
+    main {
+      padding-top: 140px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    h1 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 3.2rem; 
+      text-align: center; 
+    }
+    .price { 
+      font-size: 2rem; 
+      color: var(--accent); 
+      text-align: center; 
+      margin: 1rem 0; 
+    }
+    img { 
+      max-width: 520px; 
+      width: 100%; 
+      border-radius: 12px; 
+      display: block; 
+      margin: 2rem auto; 
+    }
+
+    form { 
+      background: white; 
+      padding: 2.5rem; 
+      border-radius: 16px; 
+      border: 1px solid #E2E8E0; 
+    }
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
-    input, select, textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
-    button { width: 100%; padding: 1.3rem; background: var(--accent); color: #000; font-weight: 700; border: none; border-radius: 50px; margin-top: 2rem; cursor: pointer; }
+    input, select, textarea { 
+      width: 100%; 
+      padding: 1rem; 
+      border: 1px solid #ccc; 
+      border-radius: 8px; 
+    }
+    button { 
+      width: 100%; 
+      padding: 1.3rem; 
+      background: var(--accent); 
+      color: #000; 
+      font-weight: 700; 
+      border: none; 
+      border-radius: 50px; 
+      margin-top: 2rem; 
+      cursor: pointer; 
+    }
+
+    /* ==================== MOBILE MENU ==================== */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0; right: 0; bottom: 0;
+        width: 70%;
+        background: #1a3c2e;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 999;
+      }
+      .nav-links.show { transform: translateX(0); }
+      .menu-toggle { display: block; }
+      main { padding-top: 120px; }
+    }
   </style>
 </head>
 <body>
@@ -40,14 +160,19 @@
   <header>
     <nav>
       <div class="logo">Mims Solutions</div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="../index.html">HOME</a>
         <a href="../services.html">SERVICES</a>
         <a href="../shop.html">SHOP</a>
         <a href="../about.html">ABOUT</a>
         <a href="../contact.html">CONTACT</a>
       </div>
-      <a href="../cart.html" style="font-size:1.6rem; text-decoration:none; color:#000;">🛒 <span id="cart-count">0</span></a>
+      
+      <a href="../cart.html" class="cart-icon">
+        🛒 <span id="cart-count">0</span>
+      </a>
+
+      <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
 
@@ -105,22 +230,28 @@
   </main>
 
   <script>
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+      menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
+    });
+
+    // Form + PayPal
     const form = document.getElementById('orderForm');
     const quantityInput = document.getElementById('quantity');
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-
       const qty = parseInt(quantityInput.value) || 1;
       const total = qty * 8;
 
-      // Submit to Web3Forms
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         body: new FormData(form)
       })
       .then(() => {
-        // After successful submission, open PayPal
         window.open(`https://paypal.me/MimsSolutions/${total}`, '_blank');
       })
       .catch(err => {
@@ -128,6 +259,14 @@
         console.error(err);
       });
     });
+
+    // Cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const countEl = document.getElementById('cart-count');
+      if (countEl) countEl.textContent = cart.length;
+    }
+    window.onload = updateCartCount;
   </script>
 </body>
 </html>
