@@ -13,18 +13,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SD Card Organizer • Mims Solutions</title>
-  
+ 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  
+ 
   <style>
     :root { --accent: #0D9488; }
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background: #F8F9F6; 
-      color: #1F2521; 
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F8F9F6;
+      color: #1F2521;
       line-height: 1.7;
     }
-
     header {
       position: fixed;
       top: 0;
@@ -63,51 +62,72 @@
     .nav-links a.active {
       color: #fff;
     }
-
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
-
     main {
-      padding-top: 150px;   /* ← Increased again for safety */
+      padding-top: 150px; /* ← Increased again for safety */
       max-width: 900px;
       margin: 0 auto;
       padding-left: 5%;
       padding-right: 5%;
     }
-
-    h1 { 
-      font-family: 'Playfair Display', serif; 
-      font-size: 3.2rem; 
-      text-align: center; 
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      text-align: center;
       margin-bottom: 0.5rem;
     }
-    .price { 
-      font-size: 2rem; 
-      color: var(--accent); 
-      text-align: center; 
-      margin-bottom: 2rem; 
+    .price {
+      font-size: 2rem;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 2rem;
     }
 
-    img { 
-      max-width: 420px; 
-      width: 100%; 
-      border-radius: 12px; 
-      display: block; 
-      margin: 2rem auto; 
+    /* Image Carousel */
+    .carousel {
+      position: relative;
+      max-width: 420px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
+    .carousel img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.4s;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
 
-    form { 
-      background: white; 
-      padding: 2.5rem; 
-      border-radius: 16px; 
-      border: 1px solid #E2E8E0; 
+    form {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 16px;
+      border: 1px solid #E2E8E0;
       margin-top: 2rem;
     }
-
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
     input, select { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
-
     .btn {
       width: 100%;
       padding: 1.3rem;
@@ -119,7 +139,6 @@
       margin-top: 1.5rem;
       cursor: pointer;
     }
-
     /* Mobile */
     @media (max-width: 768px) {
       .nav-links {
@@ -141,7 +160,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <nav>
       <div class="logo">Mims Solutions</div>
@@ -152,17 +170,21 @@
         <a href="../about.html">ABOUT</a>
         <a href="../contact.html">CONTACT</a>
       </div>
-      
+     
       <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
-
   <main>
     <h1>SD Card Organizer</h1>
     <p class="price">$5.99 each</p>
 
-    <img src="images/Screenshot 2026-04-15 081442.png" alt="SD Card Organizer">
+    <!-- Image Carousel -->
+    <div class="carousel">
+      <img id="mainImage" src="...images/4B227DE4-2DBA-4EB1-9FA9-099D3B6B9022_1_102_a.jpeg" alt="SD Card Organizer">
+      <button class="carousel-btn prev" onclick="prevImage()">‹</button>
+      <button class="carousel-btn next" onclick="nextImage()">›</button>
+    </div>
 
     <form id="addToCartForm">
       <label class="required">Main Color</label>
@@ -188,18 +210,36 @@
         <option value="Purple">Purple</option>
       </select>
       <label class="required">Personalization</label>
-  <textarea name="personalization" rows="4" 
-            placeholder="Enter the text you want printed..." 
-            required></textarea>
-
+      <textarea name="personalization" rows="4"
+                placeholder="Enter the text you want printed..."
+                required></textarea>
       <label class="required">Quantity</label>
       <input type="number" id="quantity" name="quantity" value="1" min="1" required>
-
       <button type="submit" class="btn">Add to Cart</button>
     </form>
   </main>
 
   <script>
+    // Image Carousel
+    const images = [
+      "../images/4B227DE4-2DBA-4EB1-9FA9-099D3B6B9022_1_102_a.jpeg",
+      "../images/E171ED13-CC07-4996-A761-EEA81E607E09_1_102_o.jpeg",
+      "need new"
+    ];
+    let currentIndex = 0;
+
+    function showImage() {
+      document.getElementById('mainImage').src = images[currentIndex];
+    }
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage();
+    }
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage();
+    }
+
     // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -211,23 +251,19 @@
     // Add to Cart
     document.getElementById('addToCartForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
+     
       const color = this.color.value;
       const qty = parseInt(this.quantity.value) || 1;
-
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       cart.push({
         id: Date.now(),
         name: "SD Card Organizer",
         price: 5.99,
-        Main Color: Main color,
-        Letter Color: Letter Color,
         quantity: qty
       });
-
       localStorage.setItem('cart', JSON.stringify(cart));
-      
-      alert(`✅ Added ${qty}x SD Card Organizer (${color}) to cart!`);
+     
+      alert(`✅ Added ${qty}x SD Card Organizer to cart!`);
       window.location.href = '../cart.html';
     });
 
@@ -244,12 +280,12 @@
   <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
     <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
     <p>
-      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> |
       <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
     </p>
     <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
     <p>
-      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> |
       <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
     </p>
   </footer>
