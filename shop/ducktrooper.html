@@ -13,15 +13,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DuckTrooper • Mims Solutions</title>
-  
+ 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  
+ 
   <style>
     :root { --accent: #0D9488; }
-    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      line-height: 1.7;
+      margin: 0;
+    }
 
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
+    header { 
+      position: fixed; 
+      top: 0; 
+      width: 100%; 
+      background: var(--accent); 
+      z-index: 1000; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+    }
+
+    nav { 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      padding: 1.2rem 5%; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+
     .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
     .nav-links { display: flex; gap: 2.5rem; }
     .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
@@ -30,9 +52,27 @@
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
-    main { padding-top: 400px; max-width: 900px; margin: 0 auto; padding: 0 5%; }
-    h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; text-align: center; margin-bottom: 0.5rem; }
-    .price { font-size: 2rem; color: var(--accent); text-align: center; margin-bottom: 2rem; }
+    /* STRONGER PADDING FIX */
+    main { 
+      padding-top: 320px !important;   /* Increased + !important */
+      max-width: 900px; 
+      margin: 0 auto; 
+      padding-left: 5%; 
+      padding-right: 5%; 
+    }
+
+    h1 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 3.2rem; 
+      text-align: center; 
+      margin-bottom: 0.5rem;
+    }
+    .price { 
+      font-size: 2rem; 
+      color: var(--accent); 
+      text-align: center; 
+      margin-bottom: 2rem; 
+    }
 
     /* Image Carousel */
     .carousel {
@@ -47,26 +87,7 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: opacity 0.4s;
     }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
-      color: white;
-      border: none;
-      width: 45px;
-      height: 45px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .prev { left: 10px; }
-    .next { right: 10px; }
 
     form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; margin-top: 2rem; }
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
@@ -86,7 +107,7 @@
     }
 
     @media (max-width: 768px) {
-      main { padding-top: 140px; }
+      main { padding-top: 160px !important; }
       .nav-links { position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e; flex-direction:column; justify-content:center; align-items:center; transform:translateX(100%); transition:transform 0.4s ease; z-index:999; }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
@@ -94,7 +115,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <nav>
       <div class="logo">Mims Solutions</div>
@@ -133,10 +153,8 @@
         <option value="Orange">Orange</option>
         <option value="Purple">Purple</option>
       </select>
-
       <label class="required">Quantity</label>
       <input type="number" id="quantity" name="quantity" value="1" min="1" required>
-
       <button type="submit" class="btn">Add to Cart</button>
     </form>
   </main>
@@ -145,24 +163,15 @@
     // Image Carousel
     const images = [
       "../images/AE2EBC9D-62FB-40C0-BB5A-FA7CA76BBA7C_1_201_a.jpeg",
-      "../images/E95E7529-C408-49AA-A6C6-E4D3029B56DE_1_102_a.jpeg",
-      "YOUR_THIRD_IMAGE_URL_HERE"
+      "../images/E95E7529-C408-49AA-A6C6-E4D3029B56DE_1_102_a.jpeg"
     ];
     let currentIndex = 0;
 
     function showImage() {
       document.getElementById('mainImage').src = images[currentIndex];
     }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage();
-    }
-
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage();
-    }
+    function nextImage() { currentIndex = (currentIndex + 1) % images.length; showImage(); }
+    function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(); }
 
     // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
@@ -177,7 +186,6 @@
       e.preventDefault();
       const color = this.color.value;
       const qty = parseInt(this.quantity.value) || 1;
-
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       cart.push({ id: Date.now(), name: "DuckTrooper", price: 8, color: color, quantity: qty });
       localStorage.setItem('cart', JSON.stringify(cart));
@@ -198,12 +206,12 @@
   <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
     <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
     <p>
-      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> |
       <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
     </p>
     <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
     <p>
-      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> |
       <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
     </p>
   </footer>
