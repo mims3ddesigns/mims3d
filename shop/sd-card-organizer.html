@@ -64,8 +64,9 @@
     }
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
+
     main {
-      padding-top: 100px; /* ← Increased again for safety */
+      padding-top: 280px;
       max-width: 900px;
       margin: 0 auto;
       padding-left: 5%;
@@ -97,7 +98,6 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: opacity 0.4s;
     }
     .carousel-btn {
       position: absolute;
@@ -127,7 +127,8 @@
     }
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
-    input, select { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+    input, select, textarea { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+
     .btn {
       width: 100%;
       padding: 1.3rem;
@@ -139,8 +140,9 @@
       margin-top: 1.5rem;
       cursor: pointer;
     }
-    /* Mobile */
+
     @media (max-width: 768px) {
+      main { padding-top: 160px; }
       .nav-links {
         position: fixed;
         top: 0; right: 0; bottom: 0;
@@ -155,7 +157,6 @@
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      main { padding-top: 140px; }
     }
   </style>
 </head>
@@ -170,11 +171,12 @@
         <a href="../about.html">ABOUT</a>
         <a href="../contact.html">CONTACT</a>
       </div>
-     
+    
       <a href="../cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
+
   <main>
     <h1>SD Card Organizer</h1>
     <p class="price">$5.99 each</p>
@@ -198,6 +200,7 @@
         <option value="Orange">Orange</option>
         <option value="Purple">Purple</option>
       </select>
+
       <label class="required">Letter Color</label>
       <select name="Letter Color" required>
         <option value="">Choose Color</option>
@@ -209,12 +212,15 @@
         <option value="Orange">Orange</option>
         <option value="Purple">Purple</option>
       </select>
+
       <label class="required">Personalization</label>
       <textarea name="personalization" rows="4"
                 placeholder="Enter the text you want printed..."
                 required></textarea>
+
       <label class="required">Quantity</label>
       <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+
       <button type="submit" class="btn">Add to Cart</button>
     </form>
   </main>
@@ -223,8 +229,7 @@
     // Image Carousel
     const images = [
       "../images/4B227DE4-2DBA-4EB1-9FA9-099D3B6B9022_1_102_a.jpeg",
-      "../images/E171ED13-CC07-4996-A761-EEA81E607E09_1_102_o.jpeg",
-      
+      "../images/E171ED13-CC07-4996-A761-EEA81E607E09_1_102_o.jpeg"
     ];
     let currentIndex = 0;
 
@@ -248,21 +253,28 @@
       menuToggle.textContent = navLinks.classList.contains('show') ? '✕' : '☰';
     });
 
-    // Add to Cart
+    // Add to Cart - FIXED
     document.getElementById('addToCartForm').addEventListener('submit', function(e) {
       e.preventDefault();
-     
-      const color = this.color.value;
+      
+      const mainColor = this.querySelector('select[name="Main color"]').value;
+      const letterColor = this.querySelector('select[name="Letter Color"]').value;
+      const personalization = this.querySelector('textarea[name="personalization"]').value.trim();
       const qty = parseInt(this.quantity.value) || 1;
+
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       cart.push({
         id: Date.now(),
         name: "SD Card Organizer",
         price: 5.99,
+        mainColor: mainColor,
+        letterColor: letterColor,
+        personalization: personalization || "None",
         quantity: qty
       });
+
       localStorage.setItem('cart', JSON.stringify(cart));
-     
+      
       alert(`✅ Added ${qty}x SD Card Organizer to cart!`);
       window.location.href = '../cart.html';
     });
@@ -273,7 +285,12 @@
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
-    window.onload = updateCartCount;
+
+    // Initialize on load
+    window.onload = function() {
+      showImage();
+      updateCartCount();
+    };
   </script>
 
   <!-- Consistent Footer -->
