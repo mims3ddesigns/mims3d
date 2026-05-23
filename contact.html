@@ -18,26 +18,97 @@
  
   <style>
     :root { --accent: #0D9488; }
-    body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
-    header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background: #F8F9F6; 
+      color: #1F2521; 
+      line-height: 1.7;
+    }
+    header { 
+      position: fixed; 
+      top: 0; 
+      width: 100%; 
+      background: var(--accent); 
+      z-index: 1000; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4); 
+    }
+    nav { 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      padding: 1.2rem 5%; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .logo { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 2.25rem; 
+      font-weight: 700; 
+      color: #000; 
+    }
     .nav-links { display: flex; gap: 2.5rem; }
-    .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
+    .nav-links a { 
+      color: #000; 
+      font-weight: 600; 
+      text-decoration: none; 
+      text-transform: uppercase; 
+      font-size: 0.95rem; 
+      letter-spacing: 1px; 
+    }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
-    main { padding-top: 200px; max-width: 900px; margin: 0 auto; padding: 0 5% 6rem; }
-    h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5rem); margin-bottom: 1rem; }
-    form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; }
+
+    main { 
+      padding-top: 240px;   /* Better spacing */
+      max-width: 900px; 
+      margin: 0 auto; 
+      padding: 0 5% 6rem; 
+    }
+
+    h1 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: clamp(3rem, 7vw, 5rem); 
+      margin-bottom: 1rem; 
+      text-align: center;
+    }
+
+    form { 
+      background: white; 
+      padding: 2.5rem; 
+      border-radius: 16px; 
+      border: 1px solid #E2E8E0; 
+    }
     label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-    input, textarea { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 8px; }
-    button { width: 100%; padding: 1.2rem; background: var(--accent); color: #000; font-weight: 700; border: none; border-radius: 50px; cursor: pointer; }
+    .required::after { content: " *"; color: red; }
+    input, textarea { 
+      width: 100%; 
+      padding: 1rem; 
+      margin-bottom: 1.5rem; 
+      border: 1px solid #ccc; 
+      border-radius: 8px; 
+    }
+    button { 
+      width: 100%; 
+      padding: 1.2rem; 
+      background: var(--accent); 
+      color: #000; 
+      font-weight: 700; 
+      border: none; 
+      border-radius: 50px; 
+      cursor: pointer; 
+    }
+
     @media (max-width: 768px) {
-      .nav-links { position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e; flex-direction:column; justify-content:center; align-items:center; transform:translateX(100%); transition:transform 0.4s; z-index:999; }
+      .nav-links { 
+        position: fixed; top:0; right:0; bottom:0; width:70%; 
+        background:#1a3c2e; flex-direction:column; 
+        justify-content:center; align-items:center; 
+        transform:translateX(100%); transition:transform 0.4s ease; z-index:999; 
+      }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      main { padding-top: 130px; }
+      main { padding-top: 160px; }
     }
   </style>
 </head>
@@ -65,22 +136,22 @@
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New Quote Request from Mims Solutions">
 
-      <label>Your Name</label>
+      <label class="required">Your Name</label>
       <input type="text" name="name" required>
 
-      <label>Email Address</label>
+      <label class="required">Email Address</label>
       <input type="email" name="email" required>
 
       <label>Phone (optional)</label>
       <input type="tel" name="phone">
 
-      <label>Your Message / Project Details</label>
+      <label class="required">Your Message / Project Details</label>
       <textarea name="message" rows="6" required></textarea>
 
       <button type="submit">Send Message</button>
     </form>
 
-    <div class="direct-info" style="margin-top:4rem;">
+    <div class="direct-info" style="margin-top:4rem; text-align:center;">
       <p>Or reach us directly:</p>
       <p><strong>Phone:</strong> <a href="tel:+17204681128">(720) 468-1128</a></p>
       <p><strong>Email:</strong> <a href="mailto:mims25solutions@gmail.com">mims25solutions@gmail.com</a></p>
@@ -102,25 +173,16 @@
       if (countEl) countEl.textContent = cart.length;
     }
 
-    // Form Submission with Redirect
+    // Form redirect to thanks.html
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      fetch(this.action, {
-        method: 'POST',
-        body: new FormData(this)
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = 'thanks.html';   // Redirect after success
-        } else {
-          alert("Submission failed. Please try again.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("Could not send message. Please email us directly at mims25solutions@gmail.com");
-      });
+      fetch(this.action, { method: 'POST', body: new FormData(this) })
+        .then(() => {
+          window.location.href = 'thanks.html';
+        })
+        .catch(() => {
+          alert("Could not send message. Please try again or email us directly.");
+        });
     });
 
     window.onload = updateCartCount;
