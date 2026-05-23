@@ -13,37 +13,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Your Cart • Mims Solutions</title>
-  
+ 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  
+ 
   <style>
     :root { --accent: #0D9488; }
     body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
-
     header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
     .nav-links { display: flex; gap: 2.5rem; }
     .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
-
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
-
     main { padding-top: 200px; max-width: 1000px; margin: 0 auto; padding: 0 5% 6rem; }
-
     h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5rem); text-align: center; margin-bottom: 2rem; }
-
     .cart-item { background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
     .price-breakdown, .grand-total { background: white; padding: 2rem; border-radius: 16px; margin: 2rem 0; }
     .grand-total { font-size: 2rem; font-weight: 700; text-align: right; color: var(--accent); }
-
     form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; }
     label { display: block; margin: 1.2rem 0 0.4rem; font-weight: 600; }
     .required::after { content: " *"; color: red; }
     input, textarea, select { width: 100%; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; }
     button { width: 100%; padding: 1.3rem; background: var(--accent); color: #000; font-weight: 700; border: none; border-radius: 50px; margin-top: 2rem; cursor: pointer; }
-
     @media (max-width: 768px) {
       .nav-links { position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e; flex-direction:column; justify-content:center; align-items:center; transform:translateX(100%); transition:transform 0.4s; z-index:999; }
       .nav-links.show { transform: translateX(0); }
@@ -53,7 +46,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <nav>
       <div class="logo">Mims Solutions</div>
@@ -68,15 +60,13 @@
       <div class="menu-toggle" id="menuToggle">☰</div>
     </nav>
   </header>
-
   <main>
     <h1>Your Cart</h1>
     <div id="cart-items"></div>
-
     <div class="price-breakdown" id="price-breakdown"></div>
     <div class="grand-total" id="grand-total">Grand Total: $0.00</div>
-
-    <form id="checkoutForm">
+    
+    <form id="checkoutForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New Order from Cart">
       <input type="hidden" name="cart_summary" id="cart_summary">
@@ -84,31 +74,23 @@
 
       <label class="required">Full Name</label>
       <input type="text" name="name" required>
-
       <label>Company Name (optional)</label>
       <input type="text" name="company">
-
       <label class="required">Email Address</label>
       <input type="email" name="email" required>
-
       <label class="required">Phone Number</label>
       <input type="tel" name="phone" required>
-
       <label class="required">Street Address</label>
       <input type="text" name="street" required>
-
       <label>Apartment, Suite, Unit (optional)</label>
       <input type="text" name="apt">
-
       <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 1rem;">
         <div><label class="required">City</label><input type="text" name="city" required></div>
         <div><label class="required">State</label><input type="text" name="state" required></div>
         <div><label class="required">ZIP Code</label><input type="text" name="zip" required></div>
       </div>
-
       <label>Order Notes (optional)</label>
       <textarea name="notes" rows="4"></textarea>
-
       <button type="submit">Submit Order & Pay with PayPal</button>
     </form>
   </main>
@@ -132,11 +114,16 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * (item.quantity || 1);
         subtotal += itemTotal;
-        summary += `${item.quantity || 1}x ${item.name} (${item.color || 'N/A'}) - $${itemTotal.toFixed(2)}\n`;
+        summary += `${item.quantity || 1}x ${item.name} (${item.mainColor || item.color || 'N/A'}) - $${itemTotal.toFixed(2)}\n`;
 
         container.innerHTML += `
           <div class="cart-item">
-            <div><strong>${item.name}</strong><br>Color: ${item.color || 'N/A'} × ${item.quantity || 1}</div>
+            <div><strong>${item.name}</strong><br>
+            ${item.mainColor ? `Main Color: ${item.mainColor}<br>` : ''}
+            ${item.letterColor ? `Letter Color: ${item.letterColor}<br>` : ''}
+            ${item.personalization ? `Personalization: ${item.personalization}<br>` : ''}
+            Qty: ${item.quantity || 1}
+            </div>
             <div style="text-align:right;">
               $${itemTotal.toFixed(2)}<br>
               <small onclick="removeFromCart(${index})" style="color:red; cursor:pointer;">Remove</small>
@@ -165,16 +152,12 @@
       loadCart();
     }
 
-    // Submit form → Email + PayPal + Thank You Page
+    // Submit form
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
       fetch(this.action, { method: 'POST', body: new FormData(this) })
         .then(() => {
-          // Open PayPal in new tab
           window.open(`https://paypal.me/MimsSolutions/${grandTotal.toFixed(2)}`, '_blank');
-          
-          // Go to thank you page
           window.location.href = '../thanks-shop.html';
         })
         .catch(() => alert("Error submitting order. Please try again."));
@@ -195,12 +178,12 @@
   <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
     <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
     <p>
-      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> |
       <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
     </p>
     <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
     <p>
-      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> |
       <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
     </p>
   </footer>
