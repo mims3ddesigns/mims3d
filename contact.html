@@ -60,7 +60,7 @@
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
 
     main { 
-      padding-top: 240px;   /* Better spacing */
+      padding-top: 260px;     /* Increased for better breathing room */
       max-width: 900px; 
       margin: 0 auto; 
       padding: 0 5% 6rem; 
@@ -73,9 +73,17 @@
       text-align: center;
     }
 
+    .subtitle {
+      font-size: 1.35rem;
+      color: #47555E;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
     form { 
       background: white; 
-      padding: 2.5rem; 
+      padding: 2.8rem; 
       border-radius: 16px; 
       border: 1px solid #E2E8E0; 
     }
@@ -100,6 +108,7 @@
     }
 
     @media (max-width: 768px) {
+      main { padding-top: 160px; }
       .nav-links { 
         position: fixed; top:0; right:0; bottom:0; width:70%; 
         background:#1a3c2e; flex-direction:column; 
@@ -108,7 +117,6 @@
       }
       .nav-links.show { transform: translateX(0); }
       .menu-toggle { display: block; }
-      main { padding-top: 160px; }
     }
   </style>
 </head>
@@ -159,7 +167,6 @@
   </main>
 
   <script>
-    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
@@ -173,7 +180,6 @@
       if (countEl) countEl.textContent = cart.length;
     }
 
-    // Form redirect to thanks.html
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       fetch(this.action, { method: 'POST', body: new FormData(this) })
