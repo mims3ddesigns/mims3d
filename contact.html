@@ -13,31 +13,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact • Mims Solutions</title>
-  
+ 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  
+ 
   <style>
     :root { --accent: #0D9488; }
     body { font-family: 'Inter', sans-serif; background: #F8F9F6; color: #1F2521; line-height: 1.7; }
-
     header { position: fixed; top: 0; width: 100%; background: var(--accent); z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     nav { max-width: 1400px; margin: 0 auto; padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; color: #000; }
     .nav-links { display: flex; gap: 2.5rem; }
     .nav-links a { color: #000; font-weight: 600; text-decoration: none; text-transform: uppercase; font-size: 0.95rem; letter-spacing: 1px; }
     .nav-links a:hover, .nav-links a.active { color: #fff; }
-
     .cart-icon { font-size: 1.6rem; text-decoration: none; color: #000; }
     .menu-toggle { display: none; font-size: 2rem; cursor: pointer; color: #000; }
-
-    main { padding-top: 200px; max-width: 900px; margin: 0 auto; padding: 0 5% 6rem; text-align: center; }
+    main { padding-top: 200px; max-width: 900px; margin: 0 auto; padding: 0 5% 6rem; }
     h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5rem); margin-bottom: 1rem; }
-
-    form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; text-align: left; }
+    form { background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8E0; }
     label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
     input, textarea { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 8px; }
     button { width: 100%; padding: 1.2rem; background: var(--accent); color: #000; font-weight: 700; border: none; border-radius: 50px; cursor: pointer; }
-
     @media (max-width: 768px) {
       .nav-links { position: fixed; top:0; right:0; bottom:0; width:70%; background:#1a3c2e; flex-direction:column; justify-content:center; align-items:center; transform:translateX(100%); transition:transform 0.4s; z-index:999; }
       .nav-links.show { transform: translateX(0); }
@@ -47,7 +42,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <nav>
       <div class="logo">Mims Solutions</div>
@@ -66,8 +60,8 @@
   <main>
     <h1>Get in Touch</h1>
     <p class="subtitle">Ready to bring your idea to life? Drop us a message for a free quote or consultation.</p>
-
-    <form action="https://api.web3forms.com/submit" method="POST">
+    
+    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="47582191-429a-495c-9f10-6b62f050a1e0">
       <input type="hidden" name="subject" value="New Quote Request from Mims Solutions">
 
@@ -94,6 +88,7 @@
   </main>
 
   <script>
+    // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', () => {
@@ -106,19 +101,38 @@
       const countEl = document.getElementById('cart-count');
       if (countEl) countEl.textContent = cart.length;
     }
+
+    // Form Submission with Redirect
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this)
+      })
+      .then(() => {
+        window.location.href = 'thanks.html';
+      })
+      .catch(() => {
+        alert("Something went wrong. Please try again or email us directly.");
+      });
+    });
+
     window.onload = updateCartCount;
   </script>
+
+  <!-- Consistent Footer -->
   <footer style="background: #1F2521; padding: 3rem 5%; text-align: center; font-size: 0.95rem; color: #94a3b8; border-top: 1px solid #0D9488;">
-  <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
-  <p>
-    <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> | 
-    <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
-  </p>
-  <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
-  <p>
-    <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> | 
-    <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
-  </p>
-</footer>
+    <p>&copy; 2026 Mims Solutions. All rights reserved.</p>
+    <p>
+      <a href="tel:+17204681128" style="color: #0D9488;">(720) 468-1128</a> |
+      <a href="mailto:mims25solutions@gmail.com" style="color: #0D9488;">mims25solutions@gmail.com</a>
+    </p>
+    <p>Proudly based in Cedar Park, Texas – Worldwide shipping & virtual consultations.</p>
+    <p>
+      <a href="https://www.etsy.com/shop/MimsSolutions" target="_blank" style="color: #0D9488;">Shop on Etsy</a> |
+      <a href="https://www.instagram.com/mims_solutions" target="_blank" style="color: #0D9488;">Instagram</a>
+    </p>
+  </footer>
 </body>
 </html>
